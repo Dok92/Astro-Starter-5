@@ -1,0 +1,93 @@
+---
+import arrow from "../../public/assets/img/arrow.svg";
+
+const { heading, text, imgSrc, imgAlt, reverse } = Astro.props;
+---
+
+<!-- NOTE Split reverser order of text and image (left and right ordering) -->
+<div class={`split ${reverse ? 'reverse' : ''}`}>
+  <div class="split-text">
+    <div class="text">
+      <h2>{heading}</h2>
+      <p>{text}</p>
+    </div>
+    <a id="read-more" href="#" role="button">
+      <span>Read more</span>
+      <img src={arrow.src} alt='arrow' />
+    </a>
+  </div>
+  <div class="split-image">
+    <img src={imgSrc.src} width={imgSrc.width} alt={imgAlt} />
+  </div>
+</div>
+
+
+<style>
+  .split {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-300);
+    margin: var(--space-600) 0;
+  }
+
+  .split.reverse {
+    flex-direction: row-reverse; /* Reverses the order of items */
+  }
+
+  .split-text, 
+  .split-image {
+    flex: 1 1 50%;
+    max-width: 50%;
+  }
+
+  .split-text {
+    padding: 0 var(--space-300);
+  }
+
+  .split-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--rounded-md);
+  }
+
+  #read-more {
+    background-color: rgb(var(--primary-green-800));
+    color: #fff;
+    padding: var(--space-200) var(--space-400);
+    border-radius: var(--rounded-3xl);
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  #read-more img {
+    margin-left: 4px;
+    -webkit-transition: all 0.15s ease-in-out;
+    -o-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
+  }
+
+  #read-more:hover img {
+    -webkit-transform: translateX(4px);
+    -ms-transform: translateX(4px);
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 768px) {
+    .split {
+      flex-direction: column;
+    }
+
+    .split.reverse {
+      flex-direction: column; /* Reset to column in reverse */
+    }
+
+    .split-text, 
+    .split-image {
+      max-width: 100%;
+    }
+  }
+</style>

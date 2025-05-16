@@ -1,0 +1,53 @@
+---
+const { heading, subheading, rowItems } = Astro.props;
+---
+
+<div class="centered">
+  <h1>{heading}</h1>
+  <p class="subheading">{subheading}</p>
+  <div class="row">
+    {rowItems.map((item: any) => (
+      <div class="row-item">{item}</div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .centered {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: var(--space-300);
+    gap: 1.5rem; 
+  }
+
+  .centered .subheading {
+    font-size: var(--fs-400);
+  }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .row-item {
+    padding: var(--space-200);
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .row {
+      flex-direction: column;
+    }
+
+    .row-item {
+      width: auto;
+    }
+  }
+</style>
+
