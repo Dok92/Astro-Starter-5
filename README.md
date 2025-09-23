@@ -1,6 +1,8 @@
 # Astro Starter Kit
 
-Initialize new project:
+## Initialize new project:
+- Change the path if desired destination is different
+- Replace "new-project" with your actual project name
 ```sh
 cd cd ~/Programming/DEV
 npx degit Dok92/Astro-Starter-5x new-project
@@ -16,7 +18,6 @@ All commands are run from the root of the project, from a terminal:
 
 | Command                   | Action                                           |
 | :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
 | `npm run dev`             | Starts local dev server at `localhost:4321`      |
 | `npm run build`           | Build your production site to `./dist/`          |
 | `npm run preview`         | Preview your build locally, before deploying     |
