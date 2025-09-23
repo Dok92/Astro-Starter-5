@@ -1,0 +1,174 @@
+---
+
+---
+
+<nav>
+  <button class='menu-button'>
+    Meni
+    <img src='/img/icons/chevron-down.svg' width='20' height='20' class='chevron' />
+  </button>
+
+  <div class='menu-overlay'>
+    <a href='#' class='nav-link'>Home</a>
+    <a href='#' class='nav-link'>About</a>
+    <a href='#' class='nav-link'>Faq</a>
+    <a href='#' class='nav-link'>Contact</a>
+    <div class="credits">
+      <p>&copy Client</p>
+      <p>Dizajnirao: <a href='https://webdok.rs' target='_blank'>WebDok</a></p>
+    </div>
+  </div>
+</nav>
+
+<style>
+  nav {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1001;
+  }
+
+  .menu-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1002;
+    background: #333;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.15s ease;
+  }
+
+  .menu-button:hover {
+    background: #555;
+  }
+
+  .menu-button .chevron {
+    vertical-align: text-bottom;
+    transition: transform 0.9s ease;
+  }
+
+  .menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #222;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(-100%);
+    transition: transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .menu-overlay.open {
+    transform: translateY(0);
+  }
+
+  .nav-link {
+    color: white;
+    text-decoration: none;
+    font-size: 3rem;
+    margin: 5px 0;
+    font-weight: 600;
+    opacity: 0;
+    transform: translateY(-100px);
+    transition:
+      opacity 0.45s ease,
+      transform 0.45s ease;
+  }
+
+  .nav-link:hover {
+    color: #ccc;
+  }
+
+  .nav-link.animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .nav-link:nth-child(1) {
+    transition-delay: 0.25s;
+  }
+
+  .nav-link:nth-child(2) {
+    transition-delay: 0.325s;
+  }
+
+  .nav-link:nth-child(3) {
+    transition-delay: 0.4s;
+  }
+
+  .nav-link:nth-child(4) {
+    transition-delay: 0.475s;
+  }
+
+  .nav-link:nth-child(5) {
+    transition-delay: 0.55s;
+  }
+
+  .credits {
+    position: absolute;
+    bottom: 40px;
+    text-align: center;
+    color: #888;
+    font-size: 1.2rem;
+  }
+
+  .credits a {
+    color: #aaa;
+    text-decoration: none;
+  }
+
+  .credits a:hover {
+    color: #ccc;
+  }
+</style>
+
+<script>
+  const menuButton = document.querySelector('.menu-button');
+  const menuOverlay = document.querySelector('.menu-overlay');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const chevron = document.querySelector('.chevron') as HTMLElement;
+
+  function openMenu() {
+    menuOverlay.classList.add('open');
+    chevron.style.transform = 'rotate(180deg)';
+    setTimeout(() => {
+      navLinks.forEach((link) => link.classList.add('animate'));
+    }, 250);
+  }
+
+  function closeMenu() {
+    navLinks.forEach((link) => link.classList.remove('animate'));
+    chevron.style.transform = 'rotate(0deg)';
+    setTimeout(() => {
+      menuOverlay.classList.remove('open');
+    }, 450);
+  }
+
+  menuButton.addEventListener('click', () => {
+    if (menuOverlay.classList.contains('open')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+
+  navLinks.forEach((link) => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // menuOverlay.addEventListener('click', (event) => {
+  //   if (event.target === menuOverlay) {
+  //     closeMenu();
+  //   }
+  // });
+</script>

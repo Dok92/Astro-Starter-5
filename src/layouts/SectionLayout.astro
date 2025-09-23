@@ -1,13 +1,73 @@
 ---
+let { container, padding = '', custom = '' } = Astro.props;
 
+switch (padding) {
+  case 'full':
+    padding = 'padding-full';
+    break;
+  case 'horizontal':
+    padding = 'padded-horizontal';
+    break;
+  case 'vertical':
+    padding = 'padded-vertical';
+    break;
+  case true:
+    padding = 'padding-full';
+    break;
+  default:
+    padding = '';
+}
 ---
 
-<section>
-  <slot />
+<section class={`${padding} ${custom}`}>
+  {
+    container ? (
+      <div class='container'>
+        <slot />
+      </div>
+    ) : (
+      <slot />
+    )
+  }
 </section>
 
 <style>
-  section {
-    padding: var(--section-spacing-md) 10rem;
+  section.padding-full {
+    padding: var(--section-spacing-lg) var(--section-spacing-sm);
+    width: 100%;
+  }
+
+  section.padded-horizontal {
+    padding: 0 var(--section-spacing-sm);
+    width: 100%;
+  }
+
+  section.padded-vertical {
+    padding: var(--section-spacing-lg) 0;
+    width: 100%;
+  }
+
+  .container {
+    max-width: 1280px;
+    margin-inline: auto;
+  }
+
+  section.cards-section {
+    background-color: #052f2a;
+  }
+
+  @media (max-width: 768px) {
+    section.padding-full {
+      padding: var(--section-spacing-md) var(--section-spacing-sm);
+    }
+    section.padded-horizontal {
+      padding: 0 var(--section-spacing-sm);
+    }
+    section.padded-vertical {
+      padding: var(--section-spacing-md) 0;
+    }
+    .container {
+      max-width: 90%;
+    }
   }
 </style>

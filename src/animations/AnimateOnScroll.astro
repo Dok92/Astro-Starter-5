@@ -1,0 +1,27 @@
+---
+---
+<div class="observer-container">
+  <slot />
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const observerContainers = document.querySelectorAll('.observer-container');
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      rootMargin: '0px 0px -100px 0px', 
+      threshold: 0.2 
+    });
+
+    observerContainers.forEach(container => {
+      observer.observe(container);
+    });
+  });
+</script>

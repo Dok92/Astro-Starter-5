@@ -1,0 +1,176 @@
+---
+// https://bloomava.webflow.io/
+// Not finished yet; Claude AI has not done a good job, too much work to make it work properly; To be finished if needed
+---
+
+<div class='slider-container'>
+  <div class='slider-track' id='sliderTrack'>
+   <div class="set" id="set1">
+     <img src='/public/img/placeholder/mockup-dark-vertical.webp' alt='Slider Image 1' class='slider-image' />
+     <img src='/public/img/placeholder/mockup-light-vertical.webp' alt='Slider Image 2' class='slider-image' />
+     <img src='/public/img/placeholder/mockup-dark-vertical.webp' alt='Slider Image 3' class='slider-image' />
+     <img src='/public/img/placeholder/mockup-light-vertical.webp' alt='Slider Image 4' class='slider-image' />
+     <img src='/public/img/placeholder/mockup-dark-vertical.webp' alt='Slider Image 5' class='slider-image' />
+     <img src='/public/img/placeholder/mockup-light-vertical.webp' alt='Slider Image 6' class='slider-image' /> 
+   </div>
+   <div class="set" id="set2">
+     <img src='/public/img/placeholder/mockup-light-vertical.webp' alt='Slider Image 1' class='slider-image' />
+     <img src='/public/img/placeholder/mockup-dark-vertical.webp' alt='Slider Image 2' class='slider-image' />
+     <img src='/public/img/placeholder/mockup-light-vertical.webp' alt='Slider Image 3' class='slider-image' />
+     <img src='/public/img/placeholder/mockup-dark-vertical.webp' alt='Slider Image 4' class='slider-image' />
+     <img src='/public/img/placeholder/mockup-light-vertical.webp' alt='Slider Image 5' class='slider-image' /> 
+     <img src='/public/img/placeholder/mockup-light-vertical.webp' alt='Slider Image 6' class='slider-image' /> 
+   </div>
+
+
+  </div>
+</div>
+
+<style>
+  /* body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Arial', sans-serif;
+  } */
+
+  .slider-container {
+    width: 100%;
+    height: 500px;
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  }
+
+  .slider-track {
+    display: flex;
+    height: 100%;
+    width: fit-content;
+    animation: slideLeft 3000ms linear infinite;
+  }
+
+  .slider-image {
+    height: 400px;
+    width: 280px;
+    margin: 50px 15px 50px 0;
+    border-radius: 15px;
+    object-fit: cover;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    filter: brightness(0.9) contrast(1.1);
+    transition: transform 3000ms linear infinite;
+  }
+
+  /* Initial states - alternating between 0.9 and 1.0 */
+  .slider-image:nth-child(odd) {
+    transform: scale(0.9);
+    animation: scaleOdd 3000ms linear infinite;
+  }
+
+  .slider-image:nth-child(even) {
+    transform: scale(1);
+    animation: scaleEven 3000ms linear infinite;
+  }
+
+  /* Pause animation on hover */
+  .slider-container:hover .slider-track,
+  .slider-container:hover .slider-image {
+    animation-play-state: paused;
+  }
+
+  /* Movement animation - 2s move, 5s pause */
+  @keyframes slideLeft {
+    0% {
+      transform: translateX(0);
+    }
+    28.57% {
+      /* 2s out of 7s */
+      transform: translateX(-310px);
+    }
+    100% {
+      transform: translateX(-310px);
+    }
+  }
+
+  /* Scale animation for odd images (start at 0.9, go to 1.0) */
+  @keyframes scaleOdd {
+    0% {
+      transform: scale(0.9);
+    }
+    28.57% {
+      /* During 2s movement */
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  /* Scale animation for even images (start at 1.0, go to 0.9) */
+  @keyframes scaleEven {
+    0% {
+      transform: scale(1);
+    }
+    28.57% {
+      /* During 2s movement */
+      transform: scale(0.9);
+    }
+    100% {
+      transform: scale(0.9);
+    }
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .slider-container {
+      height: 400px;
+      margin: 20px;
+      border-radius: 15px;
+    }
+
+    .slider-image {
+      height: 300px;
+      width: 200px;
+      margin: 50px 10px;
+    }
+
+    @keyframes slideLeft {
+      0% {
+        transform: translateX(0);
+      }
+      28.57% {
+        transform: translateX(-220px);
+      }
+      100% {
+        transform: translateX(-220px);
+      }
+    }
+  }
+
+  /* Glassmorphism effect */
+  .slider-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.05) 50%,
+      rgba(255, 255, 255, 0.1) 100%
+    );
+    border-radius: 20px;
+    pointer-events: none;
+  }
+</style>
+
+<script>
+
+</script>

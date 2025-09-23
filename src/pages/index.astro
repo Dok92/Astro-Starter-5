@@ -2,12 +2,106 @@
 import Hero from '../components/main/Hero.astro';
 import Footer from '../components/main/Footer.astro';
 import Layout from '../layouts/Layout.astro';
-import SectionOne from '../components/main/SectionOne.astro';
+import Navbar1 from '../components/navbars/Navbar1.astro';
+import AnimateOnScroll from '../animations/AnimateOnScroll.astro';
+import '../styles/animations.css';
+import Faq1 from '../components/accordions/Faq1.astro';
+import Navbar2 from '../components/navbars/Navbar2.astro';
+
 ---
 
 <Layout>
+  <!-- <Navbar1 /> -->
+  <!-- <Navbar2 /> -->
 	<Hero />
-	<SectionOne />
+	<section class="one">
+    <div class="container">
+      <AnimateOnScroll>
+        <h1 class="up-slide">Section h1</h1>
+      </AnimateOnScroll>
+      <div class="side-transition-imgs">
+        <div class="left-img">
+          <AnimateOnScroll>
+            <img src="/img/placeholder/mockup-dark-horizontal.webp" alt="Placeholder Image Left" class="slide-from-left"/>
+          </AnimateOnScroll>
+        </div>
+        <div class="right-img">
+          <AnimateOnScroll>
+            <img src="/img/placeholder/mockup-dark-horizontal.webp" alt="Placeholder Image Right" class="slide-from-right"/>
+          </AnimateOnScroll>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="two">
+    <div class="down-under-slide-container">
+      <AnimateOnScroll>
+        <h1 class="down-under-slide">This is test text heading</h1>
+      </AnimateOnScroll>
+    </div>
+  </section>
+  <section class="three">
+    <h1>Section 3 : Faqs</h1>
+    <Faq1 />
+  </section>
+  <section class="four">
+    <h1>Section four</h1>
+    
+  </section>
 	<Footer />
 </Layout>
 
+
+<style>
+  section {
+    padding: 5rem 4rem;
+    background-color: #f9f9f9;
+    text-align: center;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  section.one .container {
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+  .side-transition-imgs {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-top: 2rem;
+
+  }
+  .side-transition-imgs .left-img,
+  .side-transition-imgs .right-img {
+    width: 50%;
+    border-radius: 8px;
+  }
+
+  .side-transition-imgs img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+  }
+
+  .down-under-slide-container {
+    overflow: hidden;
+    padding-top: 2rem;
+  }
+
+  section.two h1 {    
+    font-size: 5rem;
+    font-weight: 500;
+  }
+
+  section.three {
+    background: #f0f0f0;
+  }
+
+  section.three h1 {
+    margin-bottom: 2rem;
+  }
+</style>

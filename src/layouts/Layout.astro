@@ -3,51 +3,54 @@ const { title, metaTitle, metaDescription } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="sr">
-	<head>
-		<title>{title}</title>
+<html lang='sr'>
+  <head>
+    <title>{title}</title>
 
-		<!-- META -->
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+    <!-- META -->
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width' />
     <meta name='title' content={metaTitle} />
     <meta name='description' content={metaDescription} />
 
     <!-- OG -->
     <meta property='og:site_name' content='' />
     <meta name='twitter:card' content='summary_large_image' />
-    <meta name="twitter:image" content="" />
-    <meta property="og:image" content="" /> 
-    <meta property='og:title' content="" />
-    <meta property='og:description' content="" />
+    <meta name='twitter:image' content='' />
+    <meta property='og:image' content='' />
+    <meta property='og:title' content='' />
+    <meta property='og:description' content='' />
     <meta property='og:image:width' content='1200' />
     <meta property='og:image:height' content='630' />
     <meta property='og:type' content='website' />
     <meta property='og:url' content='' />
-		
 
-		<!-- FAVICON -->
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- FAVICON -->
+    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
 
-    <link rel="preload" href="/fonts/Inter/InterVariable.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-
-	</head>
-	<body>
-		<slot />
-	</body>
+    <link rel='preload' href='/fonts/Inter/InterVariable.woff2' as='font' type='font/woff2' crossorigin='anonymous' />
+  </head>
+  <body>
+    <slot />
+  </body>
 </html>
 
 <style is:global>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-		color: var(--text-primary);
-		background: var(--bg);
-	}
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    color: var(--text-primary);
+    background: var(--bg);
+  }
 
-	:root {    
+  :root {
     --primary: rgb(0, 170, 193);
     /* --primaries-gradient: linear-gradient(
       -13.141deg,
@@ -56,65 +59,62 @@ const { title, metaTitle, metaDescription } = Astro.props;
     ); */
 
     --bg: rgb(0, 0, 0);
-    
+
     --text-primary: rgb(229, 229, 229);
     /* --text-gray-gradient: linear-gradient(
       180deg,
-      rgba(255, 255, 255, 1) 30%,
+      rgba(255, 255, 255, 1) 30%
       rgba(153, 153, 153, 1) 80%
     ); */
-    
-    /* --breakpoint-sm: 560px;
-    --breakpoint-md: 870px;
-    --breakpoint-xl: 1350px; */
 
     /* Responsive font sizes */
-    --fs-100: clamp(0.75rem, 2vw + 0.25rem, 0.875rem);  /* + rem is for users zooming */
+    --fs-100: clamp(0.75rem, 2vw + 0.25rem, 0.875rem); /* + rem is for users zooming */
     --fs-200: clamp(0.875rem, 2.5vw + 0.5rem, 0.975rem);
-    --fs-300: clamp(1rem, 2.75vw + 0.625rem, 1.125rem);  /* base size, centered around 1rem */
+    --fs-300: clamp(1rem, 2.75vw + 0.625rem, 1.125rem); /* base size, centered around 1rem */
     --fs-400: clamp(1.125rem, 3vw + 0.5rem, 1.25rem);
     --fs-500: clamp(1.375rem, 4vw + 0.75rem, 1.75rem);
     --fs-600: clamp(1.75rem, 5vw + 0.75rem, 2.5rem);
     --fs-700: clamp(2.25rem, 7vw + 0.75rem, 3.5rem);
     --fs-800: clamp(2.75rem, 8.5vw + 0.75rem, 4.25rem);
-    --fs-900: clamp(3rem, 10vw + 1rem, 5rem); 
+    --fs-900: clamp(3rem, 10vw + 1rem, 5rem);
 
     /* Spacing/Padding Scale */
-    --space-100: clamp(0.25rem, 0.5vw, 0.5rem);     /* 4px - 8px */
-    --space-200: clamp(0.5rem, 1vw, 0.75rem);        /* 8px - 12px */
-    --space-300: clamp(0.75rem, 1.5vw, 1rem);        /* 12px - 16px */
-    --space-400: clamp(1rem, 2vw, 1.5rem);           /* 16px - 24px */
-    --space-500: clamp(1.5rem, 3vw, 2rem);           /* 24px - 32px */
-    --space-600: clamp(2rem, 4vw, 3rem);             /* 32px - 48px */
-    --space-700: clamp(3rem, 6vw, 4rem);            /* 48px - 64px */
-    --space-800: clamp(4rem, 8vw, 6rem);            /* 64px - 96px */
+    --space-100: clamp(0.25rem, 0.5vw, 0.5rem);
+    --space-200: clamp(0.5rem, 1vw, 0.75rem); 
+    --space-300: clamp(0.75rem, 1.5vw, 1rem);
+    --space-400: clamp(1rem, 2vw, 1.5rem);
+    --space-500: clamp(1.5rem, 3vw, 2rem);
+    --space-600: clamp(2rem, 4vw, 3rem);
+    --space-700: clamp(3rem, 6vw, 4rem);
+    --space-800: clamp(4rem, 8vw, 6rem); 
 
     /* Section Spacing */
-    --section-spacing-sm: clamp(1rem, 2vw, 2rem);   
-    --section-spacing-md: clamp(2rem, 4vw, 4rem);    
-    --section-spacing-lg: clamp(4rem, 12vw, 8rem);  
-    --section-spacing-xl: clamp(10rem, 18vw, 18rem);  
+    --section-spacing-sm: clamp(1rem, 2vw, 2rem);
+    --section-spacing-md: clamp(2rem, 4vw, 4rem);
+    --section-spacing-lg: clamp(4rem, 12vw, 8rem);
+    --section-spacing-xl: clamp(10rem, 18vw, 18rem);
 
-    --container-spacing: clamp(1rem, 3vw, 2rem);     /* Consistent edge spacing */
-    
+    --container-spacing: clamp(1rem, 3vw, 2rem); /* Consistent edge spacing */
+
     /* Component Specific */
-    --card-spacing: clamp(1rem, 2vw, 1.5rem);        /* Card internal spacing */
-    --button-spacing: clamp(0.5rem, 1vw, 0.75rem) clamp(1rem, 2vw, 1.5rem); /* Button spacing (vertical, horizontal) */
+    --card-spacing: clamp(1rem, 2vw, 1.5rem); 
+    --button-spacing: clamp(0.5rem, 1vw, 0.75rem) clamp(1rem, 2vw, 1.5rem); 
 
     /* Border Radius */
     --rounded-none: 0px;
-    --rounded-sm: 0.125rem; /* 2px */
-    --rounded: 0.25rem; /* 4px */
-    --rounded-md: 0.375rem; /* 6px */
-    --rounded-lg: 0.5rem; /* 8px */
-    --rounded-xl: 0.75rem; /* 12px */
-    --rounded-2xl: 1rem; /* 16px */
-    --rounded-3xl: 1.5rem; /* 24px */
+    --rounded-xsm: 0.125rem;
+    --rounded-sm: 0.25rem;
+    --rounded-md: 0.375rem;
+    --rounded-lg: 0.5rem; 
+    --rounded-xl: 0.75rem;
+    --rounded-2xl: 1rem;
+    --rounded-3xl: 1.5rem; 
     --rounded-full: 9999px;
 
-
-    font-family: "Inter", sans-serif;
-    font-feature-settings: 'liga' 1, 'calt' 1; /* fix for Chrome */
+    font-family: 'Inter', sans-serif;
+    font-feature-settings:
+      'liga' 1,
+      'calt' 1; /* fix for Chrome */
     scroll-behavior: smooth;
   }
 
@@ -129,29 +129,57 @@ const { title, metaTitle, metaDescription } = Astro.props;
     font-size: var(--fs-400);
   }
 
-	@font-face {
-  font-family: 'Inter';
-  font-weight: 100 900; 
-  font-style: oblique 0deg 10deg;
-  src: url('/fonts/Inter/InterVariable.woff2') format('woff2 supports variations'),
-       url('/fonts/Inter/InterVariable.woff2') format('woff2-variations'),
-       url('/fonts/Inter/InterVariable.woff2') format('woff2');
-}
-
-  @media (max-width: 480px) {
-    /* :root {
-      --fs-100: 0.875rem;
-      --fs-200: 1rem;
-      --fs-300: 1.125rem;
-      --fs-400: 1.25rem;
-      --fs-500: 1.375rem;
-      --fs-600: 1.5rem;
-      --fs-700: 1.875rem;
-      --fs-800: 2.25rem;
-    } */
+  @font-face {
+    font-family: 'Inter';
+    font-weight: 100 900;
+    font-style: oblique 0deg 10deg;
+    src:
+      url('/fonts/Inter/InterVariable.woff2') format('woff2 supports variations'),
+      url('/fonts/Inter/InterVariable.woff2') format('woff2-variations'),
+      url('/fonts/Inter/InterVariable.woff2') format('woff2');
   }
 
-  /* p {
-    margin: 0
-  } */
+  @media (max-width: 768px) {
+    :root {
+      --fs-100: clamp(0.7rem, 2vw + 0.2rem, 0.8rem);
+      --fs-200: clamp(0.8rem, 2.5vw + 0.4rem, 0.9rem);
+      --fs-300: clamp(0.9rem, 2.75vw + 0.5rem, 1rem);
+      --fs-400: clamp(1rem, 3vw + 0.4rem, 1.125rem);
+      --fs-500: clamp(1.2rem, 3.5vw + 0.5rem, 1.5rem);
+      --fs-600: clamp(1.5rem, 4.5vw + 0.5rem, 2rem);
+      --fs-700: clamp(1.75rem, 6vw + 0.5rem, 2.75rem);
+      --fs-800: clamp(2rem, 7vw + 0.5rem, 3.25rem);
+      --fs-900: clamp(2.25rem, 8vw + 0.75rem, 4rem);
+
+      --space-100: clamp(0.25rem, 1vw, 0.5rem);
+      --space-200: clamp(0.5rem, 1.5vw, 0.75rem);
+      --space-300: clamp(0.625rem, 2vw, 0.875rem);
+      --space-400: clamp(0.875rem, 2.5vw, 1.25rem);
+      --space-500: clamp(1.25rem, 3vw, 1.75rem);
+      --space-600: clamp(1.5rem, 4vw, 2.5rem);
+      --space-700: clamp(2rem, 5vw, 3rem);
+      --space-800: clamp(3rem, 6vw, 4.5rem);
+
+      --section-spacing-sm: clamp(0.75rem, 1.5vw, 1.5rem);
+      --section-spacing-md: clamp(1.5rem, 3vw, 3rem);
+      --section-spacing-lg: clamp(3rem, 8vw, 6rem);
+      --section-spacing-xl: clamp(6rem, 14vw, 12rem);
+
+      --container-spacing: clamp(0.75rem, 2vw, 1.5rem);
+
+      --card-spacing: clamp(0.75rem, 1.5vw, 1.25rem);
+      --button-spacing: clamp(0.4rem, 0.75vw, 0.6rem) clamp(0.75rem, 1.5vw, 1.25rem);
+
+      .section-heading {
+        margin-bottom: var(--space-300);
+      }
+      .section-title {
+        /* margin-bottom: var(--space-600); */
+      }
+      .section-subtitle {
+        font-size: var(--fs-200);
+        margin-top: var(--space-300);
+      }
+    }
+  }
 </style>
