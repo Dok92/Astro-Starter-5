@@ -36,11 +36,11 @@ const { title, metaTitle, metaDescription } = Astro.props;
 </html>
 
 <style is:global>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
   html,
   body {
     margin: 0;
