@@ -1,16 +1,17 @@
 # Astro Starter Kit
 
 ## Initialize new project:
+
 - Change the path if desired destination is different
 - Replace "new-project" with your actual project name
+
 ```sh
-cd cd ~/Programming/DEV
-npx degit Dok92/Astro-Starter-5x new-project
-cd new-project
+cd ~/Programming/DEV
+npx degit Dok92/Astro-Starter-5x "pite-zec"
+cd "pite-zec"
 npm install
 code .
 ```
-
 
 ## 🧞 Commands
 
