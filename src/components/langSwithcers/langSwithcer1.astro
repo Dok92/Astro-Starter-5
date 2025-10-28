@@ -1,0 +1,175 @@
+---
+import { localizePath } from 'astro-i18next';
+
+function getLocaleFromUrl(url) {
+  if (typeof url === 'string') {
+    const path = new URL(url, 'https://dummy').pathname;
+    return path.startsWith('/en') ? 'en' : 'de';
+  }
+  if (url?.pathname) {
+    return url.pathname.startsWith('/en') ? 'en' : 'de';
+  }
+  if (typeof window !== 'undefined') {
+    return window.location.pathname.startsWith('/en') ? 'en' : 'de';
+  }
+  return 'de';
+}
+
+const currentLocale = getLocaleFromUrl(Astro.url);
+const currentPath = Astro.url.pathname;
+const isEnglish = currentLocale === 'en';
+---
+
+<div id='languageSwitcher'>
+  <div class={`lang de ${!isEnglish ? 'active' : ''}`}>
+    <a href={localizePath(currentPath, 'de')}>DE</a>
+  </div>
+  <div class='divider-container'>
+    <div class='divider-left'></div>
+    <div class='divider-right'></div>
+  </div>
+  <div class={`lang en ${isEnglish ? 'active' : ''}`}>
+    <a href={localizePath(currentPath, 'en')}>EN</a>
+  </div>
+</div>
+
+<style>
+  #languageSwitcher {
+    display: flex;
+    position: sticky;
+    align-items: center;
+    gap: 0;
+    margin-top: 28px;
+    margin-left: 88px;
+  }
+
+  .lang {
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+
+  .lang a {
+    text-decoration: none;
+    color: var(--text-primary-600);
+    font-weight: 500;
+    font-size: var(--fs-300);
+    transition: color 0.3s ease;
+  }
+
+  .lang.active a {
+    color: var(--text-primary-900);
+    font-weight: 600;
+  }
+
+  .divider-container {
+    display: flex;
+    width: 50px;
+    height: 2px;
+    position: relative;
+  }
+
+  .divider-left,
+  .divider-right {
+    width: 25px;
+    height: 2px;
+    transition: background-color 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  /* When DE is active */
+  #languageSwitcher:has(.lang.de.active) .divider-left {
+    background-color: #000;
+  }
+
+  #languageSwitcher:has(.lang.de.active) .divider-right {
+    background-color: #ccc;
+  }
+
+  /* When EN is active */
+  #languageSwitcher:has(.lang.en.active) .divider-left {
+    background-color: #ccc;
+  }
+
+  #languageSwitcher:has(.lang.en.active) .divider-right {
+    background-color: #000;
+  }
+
+  /* Hover on inactive DE */
+  #languageSwitcher:has(.lang.de:hover:not(.active)) .divider-left {
+    background-color: #000;
+  }
+
+  #languageSwitcher:has(.lang.de:hover:not(.active)) .divider-right {
+    background-color: #ccc;
+  }
+
+  /* Hover on inactive EN */
+  #languageSwitcher:has(.lang.en:hover:not(.active)) .divider-left {
+    background-color: #ccc;
+  }
+
+  #languageSwitcher:has(.lang.en:hover:not(.active)) .divider-right {
+    background-color: #000;
+  }
+
+  @media (min-width: 2560px) and (max-width: 3840px) {
+    #languageSwitcher {
+      margin-left: 238px;
+    }
+  }
+
+  @media (max-width: 2560px) {
+    #languageSwitcher {
+      margin-left: 118px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    #languageSwitcher {
+      margin-top: 16px;
+      margin-left: 0;
+    }
+  }
+</style>
+
+<script>
+  const languageSwitcher = document.getElementById('languageSwitcher');
+  const dividerLeft = languageSwitcher?.querySelector('.divider-left') as HTMLElement | null;
+  const dividerRight = languageSwitcher?.querySelector('.divider-right') as HTMLElement | null;
+  const activeLang = languageSwitcher?.querySelector('.lang.active');
+
+  if (languageSwitcher && dividerLeft && dividerRight && activeLang) {
+    const isDeActive = activeLang.classList.contains('de');
+
+    // Set initial colors based on active language
+    const setActiveColors = () => {
+      if (isDeActive) {
+        dividerLeft.style.backgroundColor = '#000';
+        dividerRight.style.backgroundColor = '#ccc';
+      } else {
+        dividerLeft.style.backgroundColor = '#ccc';
+        dividerRight.style.backgroundColor = '#000';
+      }
+    };
+
+    // Handle hover on language links
+    document.querySelectorAll('#languageSwitcher .lang').forEach((lang) => {
+      lang.addEventListener('mouseenter', function () {
+        if (!this.classList.contains('active')) {
+          if (this.classList.contains('de')) {
+            dividerLeft.style.backgroundColor = '#000';
+            dividerRight.style.backgroundColor = '#ccc';
+          } else {
+            dividerLeft.style.backgroundColor = '#ccc';
+            dividerRight.style.backgroundColor = '#000';
+          }
+        }
+      });
+    });
+
+    // Reset to active colors when mouse leaves
+    languageSwitcher.addEventListener('mouseleave', setActiveColors);
+
+    // Set initial colors
+    setActiveColors();
+  }
+</script>
