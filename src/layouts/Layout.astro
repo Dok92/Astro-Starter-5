@@ -1,5 +1,12 @@
 ---
-const { title, metaTitle, metaDescription } = Astro.props;
+interface Props {
+  title: string;
+  metaTitle?: string;
+  metaDescription?: string;
+  canonical?: string;
+}
+
+const { title, metaTitle, metaDescription, canonical } = Astro.props;
 ---
 
 <!doctype html>
@@ -12,6 +19,8 @@ const { title, metaTitle, metaDescription } = Astro.props;
     <meta name='viewport' content='width=device-width' />
     <meta name='title' content={metaTitle} />
     <meta name='description' content={metaDescription} />
+
+    <meta property='og:url' content={canonical} />
 
     <!-- OG -->
     <meta property='og:site_name' content='' />
@@ -26,7 +35,12 @@ const { title, metaTitle, metaDescription } = Astro.props;
     <meta property='og:url' content='' />
 
     <!-- FAVICON -->
-    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+    <link rel='icon' type='image/png' href='/img/favicon/favicon-96x96.png' sizes='96x96' />
+    <link rel='icon' type='image/svg+xml' href='/img/favicon/favicon.svg' />
+    <link rel='shortcut icon' href='/img/favicon/favicon.ico' />
+    <link rel='apple-touch-icon' sizes='180x180' href='/img/favicon/apple-touch-icon.png' />
+    <meta name='apple-mobile-web-app-title' content='' />
+    <link rel='manifest' href='/img/favicon/site.webmanifest' />
 
     <link rel='preload' href='/fonts/Inter/InterVariable.woff2' as='font' type='font/woff2' crossorigin='anonymous' />
   </head>
@@ -36,11 +50,11 @@ const { title, metaTitle, metaDescription } = Astro.props;
 </html>
 
 <style is:global>
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
   html,
   body {
     margin: 0;
@@ -60,12 +74,7 @@ const { title, metaTitle, metaDescription } = Astro.props;
 
     --bg: rgb(0, 0, 0);
 
-    --text-primary: rgb(229, 229, 229);
-    /* --text-gray-gradient: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 1) 30%
-      rgba(153, 153, 153, 1) 80%
-    ); */
+    --text-primary: hsl(0, 0%, 98%);
 
     /* Responsive font sizes */
     --fs-100: clamp(0.75rem, 2vw + 0.25rem, 0.875rem); /* + rem is for users zooming */
@@ -80,13 +89,13 @@ const { title, metaTitle, metaDescription } = Astro.props;
 
     /* Spacing/Padding Scale */
     --space-100: clamp(0.25rem, 0.5vw, 0.5rem);
-    --space-200: clamp(0.5rem, 1vw, 0.75rem); 
+    --space-200: clamp(0.5rem, 1vw, 0.75rem);
     --space-300: clamp(0.75rem, 1.5vw, 1rem);
     --space-400: clamp(1rem, 2vw, 1.5rem);
     --space-500: clamp(1.5rem, 3vw, 2rem);
     --space-600: clamp(2rem, 4vw, 3rem);
     --space-700: clamp(3rem, 6vw, 4rem);
-    --space-800: clamp(4rem, 8vw, 6rem); 
+    --space-800: clamp(4rem, 8vw, 6rem);
 
     /* Section Spacing */
     --section-spacing-sm: clamp(1rem, 2vw, 2rem);
@@ -97,18 +106,18 @@ const { title, metaTitle, metaDescription } = Astro.props;
     --container-spacing: clamp(1rem, 3vw, 2rem); /* Consistent edge spacing */
 
     /* Component Specific */
-    --card-spacing: clamp(1rem, 2vw, 1.5rem); 
-    --button-spacing: clamp(0.5rem, 1vw, 0.75rem) clamp(1rem, 2vw, 1.5rem); 
+    --card-spacing: clamp(1rem, 2vw, 1.5rem);
+    --button-spacing: clamp(0.5rem, 1vw, 0.75rem) clamp(1rem, 2vw, 1.5rem);
 
     /* Border Radius */
     --rounded-none: 0px;
     --rounded-xsm: 0.125rem;
     --rounded-sm: 0.25rem;
     --rounded-md: 0.375rem;
-    --rounded-lg: 0.5rem; 
+    --rounded-lg: 0.5rem;
     --rounded-xl: 0.75rem;
     --rounded-2xl: 1rem;
-    --rounded-3xl: 1.5rem; 
+    --rounded-3xl: 1.5rem;
     --rounded-full: 9999px;
 
     font-family: 'Inter', sans-serif;
@@ -141,40 +150,13 @@ const { title, metaTitle, metaDescription } = Astro.props;
 
   @media (max-width: 768px) {
     :root {
-      --fs-100: clamp(0.7rem, 2vw + 0.2rem, 0.8rem);
-      --fs-200: clamp(0.8rem, 2.5vw + 0.4rem, 0.9rem);
-      --fs-300: clamp(0.9rem, 2.75vw + 0.5rem, 1rem);
-      --fs-400: clamp(1rem, 3vw + 0.4rem, 1.125rem);
-      --fs-500: clamp(1.2rem, 3.5vw + 0.5rem, 1.5rem);
-      --fs-600: clamp(1.5rem, 4.5vw + 0.5rem, 2rem);
-      --fs-700: clamp(1.75rem, 6vw + 0.5rem, 2.75rem);
-      --fs-800: clamp(2rem, 7vw + 0.5rem, 3.25rem);
-      --fs-900: clamp(2.25rem, 8vw + 0.75rem, 4rem);
-
-      --space-100: clamp(0.25rem, 1vw, 0.5rem);
-      --space-200: clamp(0.5rem, 1.5vw, 0.75rem);
-      --space-300: clamp(0.625rem, 2vw, 0.875rem);
-      --space-400: clamp(0.875rem, 2.5vw, 1.25rem);
-      --space-500: clamp(1.25rem, 3vw, 1.75rem);
-      --space-600: clamp(1.5rem, 4vw, 2.5rem);
-      --space-700: clamp(2rem, 5vw, 3rem);
-      --space-800: clamp(3rem, 6vw, 4.5rem);
-
-      --section-spacing-sm: clamp(0.75rem, 1.5vw, 1.5rem);
-      --section-spacing-md: clamp(1.5rem, 3vw, 3rem);
-      --section-spacing-lg: clamp(3rem, 8vw, 6rem);
-      --section-spacing-xl: clamp(6rem, 14vw, 12rem);
-
-      --container-spacing: clamp(0.75rem, 2vw, 1.5rem);
-
-      --card-spacing: clamp(0.75rem, 1.5vw, 1.25rem);
-      --button-spacing: clamp(0.4rem, 0.75vw, 0.6rem) clamp(0.75rem, 1.5vw, 1.25rem);
+      section {
+        flex-direction: column;
+        padding: 0 10px 120px 10px;
+      }
 
       .section-heading {
         margin-bottom: var(--space-300);
-      }
-      .section-title {
-        /* margin-bottom: var(--space-600); */
       }
       .section-subtitle {
         font-size: var(--fs-200);

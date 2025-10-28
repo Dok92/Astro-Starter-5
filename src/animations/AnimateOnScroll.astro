@@ -1,26 +1,109 @@
 ---
+const { animation, duration = 0.8, delay = 0, rootMargin = '0px 0px -100px 0px' } = Astro.props;
 ---
-<div class="observer-container">
+
+<div
+  class='observer-container'
+  data-rootmargin={rootMargin}
+  data-animation={animation}
+  style={`--duration: ${duration}s; --delay: ${delay}s;`}>
   <slot />
 </div>
+
+<style>
+  .observer-container {
+    --duration: 0.8s;
+    --delay: 0s;
+  }
+
+  .observer-container > :global(*) {
+    opacity: 0;
+    transition:
+      opacity var(--duration) cubic-bezier(0.26, 0.51, 0.58, 1) var(--delay),
+      transform var(--duration) cubic-bezier(0.26, 0.51, 0.58, 1) var(--delay);
+  }
+
+  /* Up slide animation */
+  .observer-container[data-animation='up-slide'] > :global(*) {
+    transform: translateY(80px);
+  }
+
+  .observer-container[data-animation='up-slide'].is-visible > :global(*) {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Down slide */
+  .observer-container[data-animation='down-slide'] > :global(*) {
+    transform: translateY(-130px);
+    opacity: 0;
+  }
+
+  .observer-container[data-animation='down-slide'].is-visible > :global(*) {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  /* Slide from left */
+  .observer-container[data-animation='slide-from-left'] > :global(*) {
+    transform: translateX(-80px);
+  }
+  .observer-container[data-animation='slide-from-left'].is-visible > :global(*) {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Slide from right */
+  .observer-container[data-animation='slide-from-right'] > :global(*) {
+    transform: translateX(80px);
+  }
+  .observer-container[data-animation='slide-from-right'].is-visible > :global(*) {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Slide from down left */
+  .observer-container[data-animation='slide-from-down-left'] > :global(*) {
+    transform: translate(-80px, 80px);
+  }
+
+  .observer-container[data-animation='slide-from-down-left'].is-visible > :global(*) {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+
+  /* Slide from down right */
+  .observer-container[data-animation='slide-from-down-right'] > :global(*) {
+    transform: translate(80px, 80px);
+  }
+
+  .observer-container[data-animation='slide-from-down-right'].is-visible > :global(*) {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+</style>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const observerContainers = document.querySelectorAll('.observer-container');
 
-    const observer = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {
-      rootMargin: '0px 0px -100px 0px', 
-      threshold: 0.2 
-    });
+    observerContainers.forEach((container) => {
+      const rootMarginValue = (container as HTMLElement).dataset.rootmargin || '0px 0px -100px 0px';
 
-    observerContainers.forEach(container => {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          rootMargin: rootMarginValue,
+          threshold: 0.2,
+        }
+      );
+
       observer.observe(container);
     });
   });
