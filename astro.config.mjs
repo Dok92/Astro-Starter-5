@@ -11,10 +11,13 @@ export default defineConfig({
   adapter: vercel({
     webAnalytics: {
       enabled: true,
-    }
+    },
   }),
 
   vite: {
-    plugins: [tailwindcss()]
-  }
+    plugins: [tailwindcss()],
+  },
+  devToolbar: {
+    enabled: false,
+  },
 });
