@@ -1,0 +1,95 @@
+---
+import { t } from 'i18next';
+---
+
+<section id='image-carousel' class='splide references' aria-label='Beautiful Images'>
+  <div class='splide__track'>
+    <ul class='splide__list'>
+      <li class='splide__slide'>
+        <img src='/img/gallery/about.webp' alt={t('about.imgAlt')} loading='lazy' />
+      </li>
+      <li class='splide__slide'>
+        <img src='/img/gallery/exterior-6.webp' alt={t('about.imgAltExterior6')} loading='lazy' />
+      </li>
+      <li class='splide__slide'>
+        <img src='/img/gallery/exterior-1.webp' alt={t('about.imgAltExterior1')} loading='lazy' />
+      </li>
+      <li class='splide__slide'>
+        <img src='/img/gallery/exterior-2.webp' alt={t('about.imgAltExterior2')} loading='lazy' />
+      </li>
+      <li class='splide__slide'>
+        <img src='/img/gallery/exterior-3.webp' alt={t('about.imgAltExterior3')} loading='lazy' />
+      </li>
+      <li class='splide__slide'>
+        <img src='/img/gallery/exterior-4.webp' alt={t('about.imgAltExterior4')} loading='lazy' />
+      </li>
+      <li class='splide__slide'>
+        <img src='/img/gallery/exterior-5.webp' alt={t('about.imgAltExterior5')} loading='lazy' />
+      </li>
+    </ul>
+  </div>
+  <div class='my-carousel-progress'>
+    <div class='my-carousel-progress-bar'></div>
+  </div>
+</section>
+
+<style>
+  .splide {
+    width: 100%;
+    height: auto;
+    margin-bottom: var(--section-spacing-lg);
+  }
+
+  .splide img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--rounded-3xl);
+  }
+
+  .my-carousel-progress {
+    margin-top: 2rem;
+    height: 2px;
+    background: var(--ash-100);
+  }
+
+  .my-carousel-progress-bar {
+    background: var(--crust-300);
+    height: 2px;
+    -webkit-transition: width 400ms ease;
+    -o-transition: width 400ms ease;
+    transition: width 400ms ease;
+    width: 0;
+  }
+
+  @media screen and (max-width: 1270px) {
+    .splide {
+      width: 100%;
+    }
+  }
+</style>
+
+<!-- <script>
+  import '@splidejs/splide/css';
+  import Splide from '@splidejs/splide';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    var splide = new Splide('.splide', {
+      type: 'loop',
+      perPage: 1,
+      arrows: false,
+      pagination: false,
+      autoplay: true,
+      rewind: true,
+      interval: 2500,
+    });
+    var bar = splide.root.querySelector('.my-carousel-progress-bar') as HTMLElement;
+
+    splide.on('mounted move', function () {
+      var end = splide.Components.Controller.getEnd() + 1;
+      var rate = Math.min((splide.index + 1) / end, 1);
+      bar.style.width = String(100 * rate) + '%';
+    });
+
+    splide.mount();
+  });
+</script> -->

@@ -1,25 +1,36 @@
 ---
+interface Props {
+  container?: boolean;
+  padding?: string;
+  custom?: string;
+}
+
 let { container, padding = '', custom = '' } = Astro.props;
 
-switch (padding) {
-  case 'full':
-    padding = 'padding-full';
-    break;
-  case 'horizontal':
-    padding = 'padded-horizontal';
-    break;
-  case 'vertical':
-    padding = 'padded-vertical';
-    break;
-  case true:
-    padding = 'padding-full';
-    break;
-  default:
-    padding = '';
-}
+const paddingClasses = padding
+  .split(' ')
+  .filter(Boolean)
+  .map((p) => {
+    switch (p) {
+      case 'full':
+        return 'padding-full';
+      case 'horizontal':
+        return 'padded-horizontal';
+      case 'vertical':
+        return 'padded-vertical';
+      case 'top':
+        return 'padded-top';
+      case 'bottom':
+        return 'padded-bottom';
+      default:
+        return '';
+    }
+  })
+  .filter(Boolean)
+  .join(' ');
 ---
 
-<section class={`${padding} ${custom}`}>
+<section class={`${paddingClasses} ${custom}`}>
   {
     container ? (
       <div class='container'>
@@ -33,18 +44,28 @@ switch (padding) {
 
 <style>
   section.padding-full {
-    padding: var(--section-spacing-lg) var(--section-spacing-sm);
+    padding: var(--y-spacing-desktop) var(--x-spacing-desktop);
     width: 100%;
   }
 
   section.padded-horizontal {
-    padding: 0 var(--section-spacing-sm);
+    padding-left: var(--x-spacing-desktop);
+    padding-right: var(--x-spacing-desktop);
     width: 100%;
   }
 
   section.padded-vertical {
-    padding: var(--section-spacing-lg) 0;
+    padding-top: var(--y-spacing-desktop);
+    padding-bottom: var(--y-spacing-desktop);
     width: 100%;
+  }
+
+  section.padded-top {
+    padding-top: var(--y-spacing-desktop);
+  }
+
+  section.padded-bottom {
+    padding-bottom: var(--y-spacing-desktop);
   }
 
   .container {
@@ -52,20 +73,29 @@ switch (padding) {
     margin-inline: auto;
   }
 
-  section.cards-section {
-    background-color: #052f2a;
-  }
-
   @media (max-width: 768px) {
     section.padding-full {
-      padding: var(--section-spacing-md) var(--section-spacing-sm);
+      padding: var(--y-spacing-mobile) var(--x-spacing-mobile);
     }
+
     section.padded-horizontal {
-      padding: 0 var(--section-spacing-sm);
+      padding-left: var(--x-spacing-mobile);
+      padding-right: var(--x-spacing-mobile);
     }
+
     section.padded-vertical {
-      padding: var(--section-spacing-md) 0;
+      padding-top: var(--y-spacing-mobile);
+      padding-bottom: var(--y-spacing-mobile);
     }
+
+    section.padded-top {
+      padding-top: var(--y-spacing-mobile);
+    }
+
+    section.padded-bottom {
+      padding-bottom: var(--y-spacing-mobile);
+    }
+
     .container {
       max-width: 90%;
     }

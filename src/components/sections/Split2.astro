@@ -1,0 +1,211 @@
+---
+// NOTE See usage in pite-zec index
+
+import SectionsDescriptor from './SectionsDescriptor.astro';
+import Image from 'astro/components/Image.astro';
+import AnimateOnScroll from '../../animations/AnimateOnScroll.astro';
+
+export interface TextSpan {
+  text: string;
+  style?: 'bold' | 'italic';
+}
+
+export interface TextPart {
+  content?: (string | TextSpan)[];
+  type?: 'paragraph' | 'line-break' | 'empty-line';
+}
+
+interface Props {
+  id: string;
+  headline: string;
+  title: string;
+  text: TextPart[];
+  textPosition: string;
+  imgsData: {
+    src: ImageMetadata;
+    alt: string;
+  }[];
+}
+
+const { id, imgsData, headline, title, text, textPosition } = Astro.props;
+
+const animation = textPosition === 'right' ? 'slide-from-right' : 'slide-from-left';
+
+// Helper function to render text content
+function renderContent(content: (string | TextSpan)[]) {
+  return content
+    .map((item, idx) => {
+      if (typeof item === 'string') {
+        return item;
+      }
+      if (item.style === 'bold') {
+        return `<strong key=${idx}>${item.text}</strong>`;
+      }
+      if (item.style === 'italic') {
+        return `<em key=${idx}>${item.text}</em>`;
+      }
+      return item.text;
+    })
+    .join('');
+}
+---
+
+<section class={`section split text-${textPosition}`} id={id}>
+  <div class='images-container'>
+    {
+      imgsData.map((img, index) => (
+        <div class='image-wrapper'>
+          <Image src={img.src} alt={img.alt} class='section-image' id={`image-${index + 1}`} loading='lazy' />
+        </div>
+      ))
+    }
+  </div>
+  <div class='content'>
+    <div class='content-top'>
+      <SectionsDescriptor headline={headline} />
+      <AnimateOnScroll animation={animation} duration={1} delay={0}>
+        <h2 class='section-title'>{title}</h2>
+      </AnimateOnScroll>
+    </div>
+    <AnimateOnScroll animation='up-slide' duration={1} delay={0.4}>
+      <div class='section-text'>
+        {
+          text.map((part) => {
+            if (part.type === 'empty-line') {
+              return <div class='empty-line' />;
+            }
+            if (part.type === 'line-break') {
+              return <br />;
+            }
+            return <p set:html={renderContent(part.content)} />;
+          })
+        }
+      </div>
+    </AnimateOnScroll>
+  </div>
+</section>
+
+<style>
+  .section.split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--section-spacing-lg, 48px);
+    align-items: start;
+    overflow: hidden;
+  }
+
+  /* Text on the right (default) - images on left */
+  .section.split.text-right {
+    grid-template-areas: 'images content';
+  }
+
+  .section.split.text-right .images-container {
+    grid-area: images;
+  }
+
+  .section.split.text-right .content {
+    grid-area: content;
+  }
+
+  /* Text on the left - images on right */
+  .section.split.text-left {
+    grid-template-areas: 'content images';
+  }
+
+  .section.split.text-left .images-container {
+    grid-area: images;
+  }
+
+  .section.split.text-left .content {
+    grid-area: content;
+  }
+
+  .images-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--section-spacing-md);
+    width: 100%;
+    min-width: 0;
+  }
+
+  .image-wrapper {
+    overflow: hidden;
+    border-radius: var(--rounded-3xl);
+  }
+
+  .section-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .section-image:hover {
+    transform: scale(1.05);
+  }
+
+  .content {
+    width: 100%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--section-spacing-sm);
+  }
+
+  .section-title {
+    font-size: var(--fs-600);
+    font-weight: 700;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .section-text {
+    font-size: var(--fs-200);
+    line-height: 1.6;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .section-text p {
+    margin: 0;
+    display: inline;
+  }
+
+  .section-text .empty-line {
+    height: 1em;
+    display: block;
+  }
+
+  .section-text strong {
+    font-weight: 700;
+  }
+
+  .section-text em {
+    font-style: italic;
+  }
+
+  @media (max-width: 1300px) {
+    .section.split {
+      gap: var(--section-spacing-sm, 32px);
+    }
+  }
+
+  /* Responsive: stack on mobile */
+  @media (max-width: 768px) {
+    .section-title {
+      margin-bottom: var(--space-600);
+    }
+    .section.split {
+      grid-template-columns: 1fr;
+      gap: var(--section-spacing-md, 32px);
+    }
+
+    /* Always show images first on mobile */
+    .section.split.text-left,
+    .section.split.text-right {
+      grid-template-areas:
+        'content'
+        'images';
+    }
+  }
+</style>

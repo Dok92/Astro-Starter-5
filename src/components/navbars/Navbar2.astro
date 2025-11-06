@@ -2,36 +2,27 @@
 
 ---
 
-<nav>
-  <button class='menu-button'>
-    Meni
-    <img src='/img/icons/chevron-down.svg' width='20' height='20' class='chevron' />
-  </button>
+<button class='menu-button'>
+  Meni
+  <img src='/img/icons/chevron-down.svg' width='20' height='20' class='chevron' />
+</button>
 
-  <div class='menu-overlay'>
-    <a href='#' class='nav-link'>Home</a>
-    <a href='#' class='nav-link'>About</a>
-    <a href='#' class='nav-link'>Faq</a>
-    <a href='#' class='nav-link'>Contact</a>
-    <div class="credits">
-      <p>&copy Client</p>
-      <p>Dizajnirao: <a href='https://webdok.rs' target='_blank'>WebDok</a></p>
-    </div>
+<div class='menu-overlay'>
+  <a href='#' class='nav-link'>Home</a>
+  <a href='#' class='nav-link'>About</a>
+  <a href='#' class='nav-link'>Faq</a>
+  <a href='#' class='nav-link'>Contact</a>
+  <div class='credits'>
+    <p>&copy Client</p>
+    <p>Dizajnirao: <a href='https://webdok.rs' target='_blank'>WebDok</a></p>
   </div>
-</nav>
+</div>
 
 <style>
-  nav {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1001;
-  }
-
   .menu-button {
     position: fixed;
     top: 20px;
-    right: 20px;
+    right: var(--x-spacing-desktop);
     z-index: 1002;
     background: #333;
     color: white;
@@ -39,7 +30,7 @@
     padding: 12px 20px;
     border-radius: 25px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: var(--fs-200);
     transition: background 0.15s ease;
   }
 
@@ -129,6 +120,18 @@
 
   .credits a:hover {
     color: #ccc;
+  }
+
+  @media screen and (max-width: 768px) {
+    .menu-button {
+      top: var(--y-spacing-mobile);
+      right: var(--x-spacing-mobile);
+    }
+  }
+  @media screen and (max-width: 360px) {
+    .nav-link {
+      font-size: var(--fs-600);
+    }
   }
 </style>
 

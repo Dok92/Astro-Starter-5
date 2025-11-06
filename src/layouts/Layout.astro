@@ -3,10 +3,11 @@ interface Props {
   title: string;
   metaTitle?: string;
   metaDescription?: string;
+  ogTitle?: string;
   canonical?: string;
 }
 
-const { title, metaTitle, metaDescription, canonical } = Astro.props;
+const { title, metaTitle, metaDescription, ogTitle, canonical } = Astro.props;
 ---
 
 <!doctype html>
@@ -27,8 +28,8 @@ const { title, metaTitle, metaDescription, canonical } = Astro.props;
     <meta name='twitter:card' content='summary_large_image' />
     <meta name='twitter:image' content='' />
     <meta property='og:image' content='' />
-    <meta property='og:title' content='' />
-    <meta property='og:description' content='' />
+    <meta property='og:title' content={ogTitle} />
+    <meta property='og:description' content={metaDescription} />
     <meta property='og:image:width' content='1200' />
     <meta property='og:image:height' content='630' />
     <meta property='og:type' content='website' />
@@ -41,6 +42,8 @@ const { title, metaTitle, metaDescription, canonical } = Astro.props;
     <link rel='apple-touch-icon' sizes='180x180' href='/img/favicon/apple-touch-icon.png' />
     <meta name='apple-mobile-web-app-title' content='' />
     <link rel='manifest' href='/img/favicon/site.webmanifest' />
+
+    <link rel='canonical' href={canonical} />
 
     <link rel='preload' href='/fonts/Inter/InterVariable.woff2' as='font' type='font/woff2' crossorigin='anonymous' />
   </head>
@@ -65,7 +68,6 @@ const { title, metaTitle, metaDescription, canonical } = Astro.props;
   }
 
   :root {
-    --primary: rgb(0, 170, 193);
     /* --primaries-gradient: linear-gradient(
       -13.141deg,
       rgb(var(--primary-purple)) 1%,
@@ -78,8 +80,8 @@ const { title, metaTitle, metaDescription, canonical } = Astro.props;
 
     /* Responsive font sizes */
     --fs-100: clamp(0.75rem, 2vw + 0.25rem, 0.875rem); /* + rem is for users zooming */
-    --fs-200: clamp(0.875rem, 2.5vw + 0.5rem, 0.975rem);
-    --fs-300: clamp(1rem, 2.75vw + 0.625rem, 1.125rem); /* base size, centered around 1rem */
+    --fs-200: clamp(0.875rem, 2.5vw + 0.5rem, 1rem);
+    --fs-300: clamp(1rem, 2.75vw + 0.65rem, 1.125rem);
     --fs-400: clamp(1.125rem, 3vw + 0.5rem, 1.25rem);
     --fs-500: clamp(1.375rem, 4vw + 0.75rem, 1.75rem);
     --fs-600: clamp(1.75rem, 5vw + 0.75rem, 2.5rem);
@@ -98,10 +100,20 @@ const { title, metaTitle, metaDescription, canonical } = Astro.props;
     --space-800: clamp(4rem, 8vw, 6rem);
 
     /* Section Spacing */
-    --section-spacing-sm: clamp(1rem, 2vw, 2rem);
+    --section-spacing-sm: clamp(0.75rem, 2vw, 1rem);
     --section-spacing-md: clamp(2rem, 4vw, 4rem);
-    --section-spacing-lg: clamp(4rem, 12vw, 8rem);
-    --section-spacing-xl: clamp(10rem, 18vw, 18rem);
+    --section-spacing-lg: clamp(4rem, 8vw, 7.5rem);
+    --section-spacing-xl: clamp(6rem, 12vw, 12rem);
+    --section-spacing-xxl: clamp(8rem, 16vw, 16rem);
+    --section-spacing-xxxl: clamp(10rem, 18vw, 18rem);
+
+    --x-spacing-desktop: var(--section-spacing-lg);
+    --x-spacing-tablet: var(--section-spacing-md);
+    --x-spacing-mobile: var(--section-spacing-sm);
+
+    --y-spacing-desktop: var(--section-spacing-xxxl);
+    --y-spacing-tablet: var(--section-spacing-lg);
+    --y-spacing-mobile: var(--section-spacing-xl);
 
     --container-spacing: clamp(1rem, 3vw, 2rem); /* Consistent edge spacing */
 
@@ -110,7 +122,6 @@ const { title, metaTitle, metaDescription, canonical } = Astro.props;
     --button-spacing: clamp(0.5rem, 1vw, 0.75rem) clamp(1rem, 2vw, 1.5rem);
 
     /* Border Radius */
-    --rounded-none: 0px;
     --rounded-xsm: 0.125rem;
     --rounded-sm: 0.25rem;
     --rounded-md: 0.375rem;
@@ -127,15 +138,30 @@ const { title, metaTitle, metaDescription, canonical } = Astro.props;
     scroll-behavior: smooth;
   }
 
-  h1 {
-    font-size: var(--fs-700);
+  h1,
+  h2 {
     line-height: 1.2;
+    margin: 0;
+    position: relative;
+    z-index: 15;
+    text-transform: capitalize;
+  }
+
+  h1 {
+    font-size: var(--fs-800);
+    font-weight: 800;
+    margin-bottom: 24px;
   }
   h2 {
     font-size: var(--fs-500);
+    font-weight: 700;
   }
   h3 {
     font-size: var(--fs-400);
+  }
+
+  p {
+    font-size: var(--fs-200);
   }
 
   @font-face {
@@ -152,15 +178,10 @@ const { title, metaTitle, metaDescription, canonical } = Astro.props;
     :root {
       section {
         flex-direction: column;
-        padding: 0 10px 120px 10px;
       }
 
-      .section-heading {
-        margin-bottom: var(--space-300);
-      }
-      .section-subtitle {
-        font-size: var(--fs-200);
-        margin-top: var(--space-300);
+      h1 {
+        margin-bottom: 16px;
       }
     }
   }

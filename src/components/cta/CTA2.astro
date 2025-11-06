@@ -1,0 +1,58 @@
+---
+import { t } from 'i18next';
+
+interface Props {
+  type: 'phone' | 'viber';
+  phoneNumber?: string; // without plus
+}
+
+const { type, phoneNumber = '38162601080' } = Astro.props;
+
+const ctaConfig = {
+  phone: {
+    href: `tel:+${phoneNumber}`,
+    icon: '/img/icons/bi_phone-fill.svg',
+    text: t('cta'),
+    alt: 'Phone icon',
+  },
+  viber: {
+    href: `viber://contact/?number=%2B${phoneNumber}`,
+    icon: '/img/icons/viber-white.svg',
+    text: t('cta-2'),
+    alt: 'Viber icon',
+  },
+};
+
+const config = ctaConfig[type];
+---
+
+<a href={config.href}>
+  <img src={config.icon} alt={config.alt} loading='lazy' />
+  {config.text}
+</a>
+
+<style>
+  a {
+    width: max-content;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--ember-400);
+    color: white;
+    padding: 12px 24px;
+    border-radius: var(--rounded-full);
+    text-decoration: none;
+    font-weight: 500;
+    box-shadow: var(--ember-100) 0px 20px 30px -10px;
+    transition: box-shadow 0.6s ease;
+  }
+
+  a:hover {
+    box-shadow: var(--ember-200) 0px 20px 30px -10px;
+  }
+
+  img {
+    width: 20px;
+    height: auto;
+  }
+</style>
