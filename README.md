@@ -7,8 +7,8 @@
 
 ```sh
 cd ~/Programming/DEV
-npx degit Dok92/Astro-Starter-5x "pite-zec"
-cd "pite-zec"
+npx degit Dok92/Astro-Starter-5x "n-arborista"
+cd "n-arborista"
 npm install
 code .
 ```

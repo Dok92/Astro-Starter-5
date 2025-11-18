@@ -68,15 +68,11 @@ const { title, metaTitle, metaDescription, ogTitle, canonical } = Astro.props;
   }
 
   :root {
-    /* --primaries-gradient: linear-gradient(
-      -13.141deg,
-      rgb(var(--primary-purple)) 1%,
-      rgba(var(--primary-teal), 100%) 85%
-    ); */
-
-    --bg: rgb(0, 0, 0);
-
-    --text-primary: hsl(0, 0%, 98%);
+    /* Color palette - name by use case */
+    --bg: rgb(252, 255, 250);
+    --primary: #983f24;
+    --text-header: #5f4200;
+    --text-body: #775337;
 
     /* Responsive font sizes */
     --fs-100: clamp(0.75rem, 2vw + 0.25rem, 0.875rem); /* + rem is for users zooming */
@@ -153,15 +149,25 @@ const { title, metaTitle, metaDescription, ogTitle, canonical } = Astro.props;
     margin-bottom: 24px;
   }
   h2 {
-    font-size: var(--fs-500);
+    font-size: var(--fs-700);
     font-weight: 700;
   }
   h3 {
+    line-height: 1.2;
+    margin: 0;
+    position: relative;
     font-size: var(--fs-400);
+    color: var(--text-header);
   }
 
   p {
     font-size: var(--fs-200);
+    color: var(--text-body);
+  }
+
+  ul li {
+    font-size: var(--fs-200);
+    color: var(--text-body);
   }
 
   @font-face {

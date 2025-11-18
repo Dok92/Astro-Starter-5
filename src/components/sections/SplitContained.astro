@@ -1,0 +1,184 @@
+---
+// SplitCrane.astro
+import SectionsDescriptor from './SectionsDescriptor.astro';
+import Image from 'astro/components/Image.astro';
+import AnimateOnScroll from '../../animations/AnimateOnScroll.astro';
+import yard from '../../assets/yard-2.webp';
+---
+
+<section class='section split text-right' id='yard'>
+  <div class='images-container'>
+    <div class='image-wrapper'>
+      <Image src={yard} alt='Sečenje drveća u dvorištu' class='section-image' loading='lazy' />
+    </div>
+  </div>
+  <div class='content'>
+    <div class='content-top'>
+      <SectionsDescriptor headline='Seča drveća u dvorištu' />
+      <AnimateOnScroll animation='slide-from-right' duration={1} delay={0}>
+        <h2 class='section-title'>Sečenje drveća u dvorištu</h2>
+      </AnimateOnScroll>
+    </div>
+    <AnimateOnScroll animation='up-slide' duration={1} delay={0.4}>
+      <div class='section-text'>
+        <p>
+          <strong>Sečenje drveća u dvorištu</strong> obuhvata uklanjanje stabala i grana koje mogu ugroziti bezbednost imovine,
+          krova, ograde, vozila ili dodirivati električne vodove čime sprečavate nesreće i štetu. Naš porodični tim Arboristi
+          Nenadović radi pažljivo i stručno, uz maksimalnu zaštitu prostora i okoline.
+        </p>
+        <br />
+        <p>
+          Zahvaljujući iskustvu i savremenoj opremi, svako <em>sečenje drveća u dvorištu</em> obavljamo kontrolisano i bez
+          oštećenja. Koristimo užad, alate i po potrebi korpu, kako bismo bezbedno uklonili i najviše grane. Nakon završetka
+          posla, prostor ostavljamo urednim i čistim, spremnim za dalju upotrebu.
+        </p>
+        <br /><br />
+        <h3 class='price-heading'>Sečenje drveća u dvorištu cena</h3>
+        <p>
+          Kada je u pitanju sečenje drveća u dvorištu cena zavisi od veličine stabla, pristupačnosti terena i obima
+          posla. Cenu formiramo nakon besplatne procene na licu mesta, u skladu sa zahtevima klijenta i realnim
+          uslovima. Naš cilj je sigurno, kvalitetno i fer rešenje za svaku situaciju.
+        </p>
+        <br /><br />
+        <h3>Kako se vrši seča drveća u dvorištu</h3>
+        <ul>
+          <li>uklanjanje pojedinačnih grana</li>
+          <li>skraćivanje visokih krošnji</li>
+          <li>sečenje suvih i opasnih delova stabla</li>
+          <li>uklanjanje grana koje prelaze u komšijsko dvorište</li>
+          <li>precizno sečenje iznad krova i objekata</li>
+          <li>rad u skučenim dvorištima gde nema prostora za obaranje</li>
+        </ul>
+      </div>
+    </AnimateOnScroll>
+  </div>
+</section>
+
+<style>
+  .section.split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--section-spacing-lg, 48px);
+    align-items: start;
+    overflow: hidden;
+  }
+
+  .section.split.text-right {
+    grid-template-areas: 'images content';
+  }
+
+  .section.split.text-right .images-container {
+    grid-area: images;
+  }
+
+  .section.split.text-right .content {
+    grid-area: content;
+  }
+
+  .section.split.text-left {
+    grid-template-areas: 'content images';
+  }
+
+  .section.split.text-left .images-container {
+    grid-area: images;
+  }
+
+  .section.split.text-left .content {
+    grid-area: content;
+  }
+
+  .images-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--section-spacing-md);
+    width: 100%;
+    min-width: 0;
+  }
+
+  .image-wrapper {
+    overflow: hidden;
+    border-radius: var(--rounded-3xl);
+  }
+
+  .section-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .section-image:hover {
+    transform: scale(1.05);
+  }
+
+  .content {
+    width: 100%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--section-spacing-sm);
+  }
+
+  .section-title {
+    font-size: var(--fs-600);
+    font-weight: 700;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .section-text {
+    font-size: var(--fs-200);
+    line-height: 1.6;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .section-text p {
+    margin: 0;
+    display: inline;
+  }
+
+  .section-text .empty-line {
+    height: 1em;
+    display: block;
+  }
+
+  .section-text strong {
+    font-weight: 700;
+  }
+
+  .section-text em {
+    font-style: italic;
+  }
+
+  .price-heading {
+    font-size: var(--fs-400);
+    font-weight: 700;
+    margin: 0;
+    padding-bottom: 0.5em;
+    display: block;
+  }
+
+  @media (max-width: 1300px) {
+    .section.split {
+      gap: var(--section-spacing-sm, 32px);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .section-title {
+      margin-bottom: var(--space-600);
+    }
+    .section.split {
+      grid-template-columns: 1fr;
+      gap: var(--section-spacing-md, 32px);
+    }
+
+    .section.split.text-left,
+    .section.split.text-right {
+      grid-template-areas:
+        'content'
+        'images';
+    }
+  }
+</style>
