@@ -4,53 +4,57 @@ import Footer from '../components/main/Footer.astro';
 import Layout from '../layouts/Layout.astro';
 import Navbar1 from '../components/navbars/Navbar1.astro';
 import AnimateOnScroll from '../animations/AnimateOnScroll.astro';
-import '../styles/animations.css';
 import Faq1 from '../components/accordions/Faq1.astro';
 import Navbar2 from '../components/navbars/Navbar2.astro';
-
 ---
 
-<Layout>
+<Layout title='Home' metaTitle='Home' metaDescription='Home'>
   <!-- <Navbar1 /> -->
   <!-- <Navbar2 /> -->
-	<Hero />
-	<section class="one">
-    <div class="container">
+  <Hero />
+  <section class='one'>
+    <div class='container'>
       <AnimateOnScroll>
-        <h1 class="up-slide">Section h1</h1>
+        <h1 class='up-slide'>Section h1</h1>
       </AnimateOnScroll>
-      <div class="side-transition-imgs">
-        <div class="left-img">
+      <div class='side-transition-imgs'>
+        <div class='left-img'>
           <AnimateOnScroll>
-            <img src="/img/placeholder/mockup-dark-horizontal.webp" alt="Placeholder Image Left" class="slide-from-left"/>
+            <img
+              src='/img/placeholder/mockup-dark-horizontal.webp'
+              alt='Placeholder Image Left'
+              class='slide-from-left'
+            />
           </AnimateOnScroll>
         </div>
-        <div class="right-img">
+        <div class='right-img'>
           <AnimateOnScroll>
-            <img src="/img/placeholder/mockup-dark-horizontal.webp" alt="Placeholder Image Right" class="slide-from-right"/>
+            <img
+              src='/img/placeholder/mockup-dark-horizontal.webp'
+              alt='Placeholder Image Right'
+              class='slide-from-right'
+            />
           </AnimateOnScroll>
         </div>
       </div>
     </div>
   </section>
-  <section class="two">
-    <div class="down-under-slide-container">
+  <section class='two'>
+    <div class='down-under-slide-container'>
       <AnimateOnScroll>
-        <h1 class="down-under-slide">This is test text heading</h1>
+        <h1 class='down-under-slide'>This is test text heading</h1>
       </AnimateOnScroll>
     </div>
   </section>
-  <section class="three">
+  <section class='three'>
     <h1>Section 3 : Faqs</h1>
     <Faq1 />
   </section>
-  <section class="four">
+  <section class='four'>
     <h1>Section four</h1>
-    
   </section>
-	<Footer />
+  <Footer />
 </Layout>
-
 
 <style>
   section {
@@ -72,7 +76,6 @@ import Navbar2 from '../components/navbars/Navbar2.astro';
     justify-content: space-between;
     gap: 1.5rem;
     margin-top: 2rem;
-
   }
   .side-transition-imgs .left-img,
   .side-transition-imgs .right-img {
@@ -92,7 +95,7 @@ import Navbar2 from '../components/navbars/Navbar2.astro';
     padding-top: 2rem;
   }
 
-  section.two h1 {    
+  section.two h1 {
     font-size: 5rem;
     font-weight: 500;
   }
