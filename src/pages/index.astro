@@ -1,25 +1,23 @@
 ---
-import Hero from '../components/main/Hero.astro';
+// import Hero from '../components/main/Hero.astro';
 import Footer from '../components/main/Footer.astro';
 import Layout from '../layouts/Layout.astro';
-import Navbar1 from '../components/navbars/Navbar1.astro';
 import AnimateOnScroll from '../animations/AnimateOnScroll.astro';
 import Faq1 from '../components/accordions/Faq1.astro';
-import Navbar2 from '../components/navbars/Navbar2.astro';
+// import Navbar5 from '../components/navbars/Navbar5.astro';
 ---
 
 <Layout title='Home' metaTitle='Home' metaDescription='Home'>
-  <!-- <Navbar1 /> -->
-  <!-- <Navbar2 /> -->
-  <Hero />
+  <!-- <Navbar5 /> -->
+  <!-- <Hero /> -->
   <section class='one'>
     <div class='container'>
-      <AnimateOnScroll>
+      <AnimateOnScroll animation='up-slide'>
         <h1 class='up-slide'>Section h1</h1>
       </AnimateOnScroll>
       <div class='side-transition-imgs'>
         <div class='left-img'>
-          <AnimateOnScroll>
+          <AnimateOnScroll animation='slide-from-left'>
             <img
               src='/img/placeholder/mockup-dark-horizontal.webp'
               alt='Placeholder Image Left'
@@ -28,7 +26,7 @@ import Navbar2 from '../components/navbars/Navbar2.astro';
           </AnimateOnScroll>
         </div>
         <div class='right-img'>
-          <AnimateOnScroll>
+          <AnimateOnScroll animation='slide-from-right'>
             <img
               src='/img/placeholder/mockup-dark-horizontal.webp'
               alt='Placeholder Image Right'
@@ -41,7 +39,7 @@ import Navbar2 from '../components/navbars/Navbar2.astro';
   </section>
   <section class='two'>
     <div class='down-under-slide-container'>
-      <AnimateOnScroll>
+      <AnimateOnScroll animation='down-slide'>
         <h1 class='down-under-slide'>This is test text heading</h1>
       </AnimateOnScroll>
     </div>

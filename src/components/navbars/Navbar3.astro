@@ -1,0 +1,404 @@
+---
+
+---
+
+<!-- NOTE Cube, square, industrial: https://t3.tech/ -->
+<nav>
+  <div class='nav-container'>
+    <div class='nav-main'>
+      <button class='menu-button'>
+        <div class='menu-line line-top'></div>
+        <div class='menu-line line-middle'></div>
+        <div class='menu-line line-bottom'></div>
+      </button>
+      <a href='#' class='logo' aria-current='page'>xLogo</a>
+    </div>
+
+    <div class='nav-menu-container'>
+      <div class='nav-menu'>
+        <a href='#' class='nav-link'>Home</a>
+        <a href='#' class='nav-link'>About</a>
+        <a href='#' class='nav-link'>Faq</a>
+        <a href='#' class='nav-link'>Contact</a>
+      </div>
+      <div class='nav-menu-bottom'>
+        <div class='credits'>
+          <p>&copy Client</p>
+          <p>Dizajnirao: <a href='https://webdok.rs' target='_blank'>WebDok</a></p>
+        </div>
+      </div>
+    </div>
+
+    <a href='' class='cta-alternate'>request demo</a>
+    <a href='' class='cta'>See how it works</a>
+  </div>
+</nav>
+
+<style>
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem var(--x-spacing-desktop);
+    z-index: 10000;
+    color: white;
+    background-color: transparent;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+  }
+
+  nav.scrolled {
+    background-color: #fff5eb;
+    color: black;
+  }
+
+  nav.scrolled a {
+    color: black;
+  }
+
+  nav.scrolled .cta-alternate {
+    border-color: black;
+  }
+
+  nav.scrolled .cta-alternate:hover {
+    color: white !important;
+  }
+
+  .nav-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-main {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .nav-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    text-transform: uppercase;
+  }
+
+  .nav-link {
+    transition: all 0.3s ease;
+  }
+
+  .menu-button {
+    display: none;
+  }
+
+  .nav-menu-bottom {
+    display: none;
+  }
+
+  .cta-alternate {
+    text-transform: uppercase;
+    padding: 12px 16px;
+    border: 1px solid whitesmoke;
+    transition: all 0.6s ease;
+  }
+
+  .cta-alternate:hover {
+    background-color: black;
+    border: 1px solid black;
+  }
+
+  .cta {
+    display: none;
+  }
+
+  a {
+    color: white;
+    text-decoration: none;
+  }
+
+  @media (max-width: 768px) {
+    nav {
+      padding: 1rem var(--x-spacing-mobile);
+    }
+
+    nav.open {
+      height: 100vh;
+    }
+
+    .nav-main {
+      flex-direction: row;
+      z-index: 3;
+    }
+
+    nav.scrolled .menu-button {
+      border: 1px solid black;
+    }
+
+    nav.scrolled .menu-line {
+      background-color: black;
+    }
+
+    .menu-button {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      cursor: pointer;
+      padding: 0.625rem 0.5rem;
+      border: 1px solid white;
+      background: none;
+      width: 2rem;
+      height: 2rem;
+      z-index: 4;
+    }
+
+    .menu-line {
+      position: absolute;
+      width: 1rem;
+      height: 1px;
+      background-color: white;
+      transition: all 0.3s ease;
+    }
+
+    .line-top {
+      width: 8px;
+      transform: translate(0px, -6px);
+    }
+
+    .line-top.open {
+      transform: rotate(45deg);
+      left: 7px;
+      width: 1rem;
+    }
+
+    .line-middle {
+      transform: translate(0px, 0px);
+      transform-origin: 50% 50%;
+    }
+
+    .line-middle.open {
+      transform: scale(0, 1);
+    }
+
+    .line-bottom {
+      width: 10px;
+      transform: translate(0px, 6px);
+      /* can leave it here instead on open, makes different look: right: 7px; */
+    }
+
+    .line-bottom.open {
+      transform: rotate(-45deg);
+      width: 1rem;
+      right: 7px;
+    }
+
+    .nav-menu-container {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      background: #fff5eb;
+      transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+      z-index: 1;
+    }
+
+    nav.open .nav-menu-container {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .nav-menu {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0;
+      padding: 0 var(--x-spacing-mobile);
+      transform: translateY(12px);
+      opacity: 0;
+      transition:
+        transform 0.3s ease,
+        opacity 0.3s ease;
+    }
+
+    nav.open .nav-menu {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .nav-link {
+      position: relative;
+      display: block;
+      width: 100%;
+      padding: 1.5rem 0;
+      font-size: var(--fs-200);
+      color: black;
+      border-bottom: 1px solid #bab4ad;
+
+      opacity: 0;
+      transform: translateX(22rem);
+      transition:
+        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    nav.open .nav-link {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .nav-link:first-of-type {
+      border-top: 1px solid #bab4ad;
+    }
+
+    nav.open .nav-link.out {
+      opacity: 0;
+      transform: translateX(22rem);
+    }
+
+    .nav-menu-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 var(--x-spacing-mobile) 6rem;
+      font-size: var(--fs-75);
+      color: #000000;
+    }
+
+    .nav-menu-bottom .credits {
+      flex-direction: row;
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .nav-menu-bottom a,
+    p {
+      color: black;
+    }
+
+    .nav-menu-bottom a {
+      font-weight: bold;
+    }
+
+    .cta-alternate {
+      font-size: var(--fs-100);
+      z-index: 3;
+    }
+
+    nav.open .cta {
+      display: flex;
+      position: fixed;
+      left: var(--x-spacing-mobile);
+      right: var(--x-spacing-mobile);
+      bottom: 1.25rem;
+      text-transform: uppercase;
+      cursor: pointer;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      transition:
+        color 0.3s,
+        background-color 0.3s,
+        border-color 0.3s;
+      z-index: 4;
+      background-color: black;
+      color: white;
+      padding: 16px 0;
+    }
+
+    body.no-scroll {
+      overflow: hidden;
+      height: 100vh;
+    }
+  }
+</style>
+
+<script>
+  const nav = document.querySelector('nav');
+  const lineTop = document.querySelector('.line-top');
+  const lineMiddle = document.querySelector('.line-middle');
+  const lineBottom = document.querySelector('.line-bottom');
+  const menuButton = document.querySelector('.menu-button');
+  const links = document.querySelectorAll('.nav-menu .nav-link') as NodeListOf<HTMLAnchorElement>;
+
+  const STAGGER = 0.17;
+  const BASE_DURATION = 0.5;
+
+  function updateScrolledState() {
+    if (nav.classList.contains('open')) return;
+    if (window.scrollY > 400) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  }
+
+  function openMenu() {
+    document.body.classList.add('no-scroll');
+    nav.classList.add('open');
+    nav.classList.add('scrolled');
+
+    lineTop.classList.add('open');
+    lineMiddle.classList.add('open');
+    lineBottom.classList.add('open');
+
+    links.forEach((link, index) => {
+      const delay = index * STAGGER;
+      link.classList.remove('out');
+      link.style.transitionDelay = `${delay}s`;
+      link.style.transitionTimingFunction = 'cubic-bezier(0.16, 1, 0.3, 1)';
+    });
+  }
+
+  function closeMenu() {
+    document.body.classList.remove('no-scroll');
+    const count = links.length;
+
+    links.forEach((link, index) => {
+      const delay = (count - 1 - index) * STAGGER;
+      link.classList.add('out');
+      link.style.transitionDelay = `${delay}s`;
+      link.style.transitionTimingFunction = 'cubic-bezier(0.64, 0, 0.78, 0)';
+    });
+
+    lineTop.classList.remove('open');
+    lineMiddle.classList.remove('open');
+    lineBottom.classList.remove('open');
+
+    const totalTime = BASE_DURATION + STAGGER * (count - 1);
+
+    setTimeout(() => {
+      nav.classList.remove('open');
+
+      links.forEach((link) => {
+        link.classList.remove('out');
+        link.style.transitionDelay = '';
+        link.style.transitionTimingFunction = '';
+      });
+
+      updateScrolledState();
+    }, totalTime * 1000);
+  }
+
+  menuButton.addEventListener('click', () => {
+    if (!nav.classList.contains('open')) {
+      openMenu();
+    } else {
+      closeMenu();
+    }
+  });
+
+  window.addEventListener('scroll', updateScrolledState);
+</script>

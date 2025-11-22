@@ -1,0 +1,574 @@
+---
+// FROM https://www.oharchitecture.com.au/process (works on round and square)
+
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/works', label: 'Works' },
+  { href: '/studio', label: 'Studio' },
+  { href: '/process', label: 'Process' },
+  { href: '/gallery', label: 'Gallery' },
+];
+---
+
+<header class='navbar'>
+  <div class='navbar-inner'>
+    <a href='/' class='navbar-brand' aria-label='Return to home'>
+      <span class='navbar-brand-text'>OH Architecture</span>
+    </a>
+
+    <nav class='navbar-links'>
+      {
+        navLinks.map((link) => (
+          <a href={link.href} class='navbar-link'>
+            <span class='navbar-link-inner'>{link.label}</span>
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class='navbar-cta'>
+      <button class='btn-default btn-get-in-touch' data-contact-btn type='button'>
+        <span class='btn-default-inner'>
+          <span class='btn-default-text'>Get in touch</span>
+          <span class='btn-default-circle'></span>
+        </span>
+      </button>
+
+      <button class='navbar-menu-btn' data-menu-btn type='button'>
+        <span class='navbar-menu-text'>Menu</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class='navbar-mini-wrapper'>
+  <div class='navbar-mini' data-mini-nav>
+    <button class='btn-default btn-get-in-touch' data-contact-btn type='button'>
+      <span class='btn-default-inner'>
+        <span class='btn-default-text'>Get in touch</span>
+        <span class='btn-default-circle'></span>
+      </span>
+    </button>
+
+    <button class='navbar-mini-menu' data-menu-btn type='button'>
+      <span class='navbar-menu-text'>Menu</span>
+    </button>
+  </div>
+</div>
+
+<div class='menu-overlay' data-menu-overlay>
+  <header class='menu-header'>
+    <div class='menu-header-inner'>
+      <div class='menu-brand'>
+        <span class='navbar-brand-text'>OH Architecture</span>
+      </div>
+      <div class='menu-header-right'>
+        <button class='btn-default btn-get-in-touch menu-header-cta' data-contact-btn type='button'>
+          <span class='btn-default-inner'>
+            <span class='btn-default-text'>Get in touch</span>
+            <span class='btn-default-circle'></span>
+          </span>
+        </button>
+        <button class='menu-close-btn' data-menu-close type='button'>
+          <span class='menu-close-text'>Close</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class='menu-body'>
+    <ul class='menu-links'>
+      {
+        navLinks.map((link) => (
+          <li class='menu-link-item'>
+            <a href={link.href} class='menu-link'>
+              <div class='menu-link-inner'>
+                <span class='menu-link-text'>{link.label}</span>
+              </div>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <div class='menu-bottom'>
+    <div class='credits'>
+      <p>&copy; Client</p>
+      <p>
+        Dizajnirao:
+        <a href='https://webdok.rs' target='_blank' rel='noreferrer'>WebDok</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .navbar {
+    width: 100%;
+    padding-inline: var(--x-spacing-desktop);
+    padding-block: var(--section-spacing-sm);
+    position: relative;
+    z-index: 20;
+  }
+
+  .navbar-inner {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: var(--space-400);
+  }
+
+  .navbar-brand {
+    text-decoration: none;
+  }
+
+  .menu-brand span {
+    color: white;
+  }
+
+  .navbar-brand-text {
+    font-size: var(--fs-700);
+    font-weight: 700;
+    color: black;
+  }
+
+  .navbar-links {
+    justify-self: center;
+    display: flex;
+    gap: var(--space-300);
+  }
+
+  .navbar-link {
+    font-size: var(--fs-200);
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .navbar-link-inner {
+    display: inline-block;
+    transform: translateY(0);
+    text-shadow: 0 1em 0 currentColor;
+    transition: transform 0.545s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .navbar-link:hover .navbar-link-inner {
+    transform: translateY(-1em);
+  }
+
+  .navbar-cta {
+    display: flex;
+    align-items: center;
+    /* gap: var(--space-300); */
+    width: 280px;
+    justify-content: space-between;
+    justify-self: end;
+  }
+
+  .btn-default {
+    border-radius: var(--rounded-full);
+    border: none;
+    padding-inline: var(--space-400);
+    padding-block: var(--space-200);
+    background-color: #000;
+    color: #fff;
+    cursor: pointer;
+    font-size: var(--fs-200);
+    text-transform: uppercase;
+  }
+
+  .btn-default-inner {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-200);
+    overflow: hidden;
+  }
+
+  .btn-default-text {
+    position: relative;
+    display: inline-block;
+    text-shadow: 0 1em 0 currentColor;
+    transform: translateY(0);
+    transition: transform 0.545s cubic-bezier(0.16, 1, 0.3, 1);
+    padding-top: 2px;
+  }
+
+  .btn-default-circle {
+    width: 8px;
+    height: 8px;
+    border-radius: var(--rounded-full);
+    border: 1px solid currentColor;
+    will-change: transform;
+    transform: scale(1);
+    transition:
+      transform 0.545s cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 0.3s ease;
+  }
+
+  .btn-default:hover .btn-default-text {
+    transform: translateY(-1em);
+  }
+
+  .btn-default:hover .btn-default-circle {
+    transform: scale(0.6);
+    background-color: #fff;
+  }
+
+  .navbar-menu-btn,
+  .navbar-mini-menu {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: var(--fs-200);
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .navbar-menu-text {
+    display: inline-block;
+    text-shadow: 0 1.1em 0 currentColor;
+    transform: translateY(0);
+    transition: transform 0.545s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .navbar-menu-btn:hover .navbar-menu-text,
+  .navbar-mini-menu:hover .navbar-menu-text {
+    transform: translateY(-1.1em);
+  }
+
+  .navbar-mini-wrapper {
+    position: fixed;
+    top: var(--space-400);
+    right: var(--x-spacing-desktop);
+    z-index: 40;
+    overflow: hidden;
+    height: 3rem;
+    pointer-events: none;
+  }
+
+  .navbar-mini {
+    display: flex;
+    align-items: center;
+    width: 280px;
+    justify-content: space-between;
+    transform: translateY(115%);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.7, 1);
+    pointer-events: auto;
+  }
+
+  .navbar-mini.is-visible {
+    transform: translateY(4px);
+  }
+
+  :root.menu-open .navbar-mini {
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .menu-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: #000;
+    color: #fff;
+    z-index: 30;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
+    transition: clip-path 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    padding-inline: var(--x-spacing-desktop);
+    padding-block: var(--space-300);
+    pointer-events: none;
+  }
+
+  .menu-overlay.is-open {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    pointer-events: auto;
+  }
+
+  .menu-header {
+    margin-bottom: var(--space-400);
+  }
+
+  .menu-header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-400);
+  }
+
+  .menu-header-cta {
+    background-color: transparent;
+    border: 1px solid #fff;
+  }
+
+  .menu-close-btn {
+    /* margin-left: var(--space-400); */
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: var(--fs-200);
+    text-transform: uppercase;
+    color: #fff;
+    overflow: hidden;
+  }
+
+  .menu-header-right {
+    width: 280px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .menu-close-text {
+    display: inline-block;
+    text-shadow: 0 1.1em 0 currentColor;
+    transform: translateY(0);
+    transition: transform 0.545s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .menu-close-btn:hover .menu-close-text {
+    transform: translateY(-1em);
+  }
+
+  .menu-body {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  .menu-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .menu-link-item + .menu-link-item {
+    margin-top: -12px;
+  }
+
+  .menu-link {
+    font-size: var(--fs-800);
+    font-weight: 500;
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;
+    overflow: hidden;
+    display: inline-block;
+  }
+
+  .menu-link-text {
+    text-shadow: 0 1.1em 0 currentColor;
+    transform: translateY(0);
+    transition: transform 0.545s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .menu-link-inner {
+    display: inline-block;
+    transform: translateY(102%);
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: calc(var(--i) * 0.1s);
+    text-shadow: 0 1em 0 currentColor; /* REQUIRED for hover animation */
+  }
+
+  .menu-overlay.is-open .menu-link-item:nth-child(1) .menu-link-inner {
+    transition-delay: 0.05s;
+    transform: translateY(0%);
+  }
+
+  .menu-overlay.is-open .menu-link-item:nth-child(2) .menu-link-inner {
+    transition-delay: 0.1s;
+    transform: translateY(0%);
+  }
+
+  .menu-overlay.is-open .menu-link-item:nth-child(3) .menu-link-inner {
+    transition-delay: 0.15s;
+    transform: translateY(0%);
+  }
+
+  .menu-overlay.is-open .menu-link-item:nth-child(4) .menu-link-inner {
+    transition-delay: 0.2s;
+    transform: translateY(0%);
+  }
+
+  .menu-overlay.is-open .menu-link-item:nth-child(5) .menu-link-inner {
+    transition-delay: 0.25s;
+    transform: translateY(0%);
+  }
+  /* When menu is open: bring links into view */
+  .menu.active .menu-link-inner {
+    transform: translateY(0);
+  }
+
+  /* Hover animation (same as nav & buttons) */
+  .menu-link:hover .menu-link-inner {
+    transform: translateY(-1em);
+    transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .menu-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-size: var(--fs-100);
+    margin-top: var(--section-spacing-md);
+  }
+
+  .credits {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-300);
+    margin-bottom: var(--space-400);
+  }
+
+  .credits a,
+  p {
+    color: inherit;
+    text-decoration: none;
+    font-size: var(--fs-500);
+    margin: 0;
+    color: white;
+  }
+
+  .credits a {
+    font-weight: 700;
+  }
+
+  @media (max-width: 900px) {
+    .navbar {
+      padding-inline: var(--x-spacing-mobile);
+    }
+
+    .navbar-brand-text {
+      font-size: var(--fs-500);
+    }
+
+    .navbar-mini-wrapper {
+      top: var(--space-200);
+      right: var(--x-spacing-mobile);
+      height: 3.25rem;
+    }
+
+    .navbar-mini-menu {
+      padding: 0.75rem;
+      border-radius: 33px;
+      background: #d9d9d9;
+    }
+
+    .navbar-menu-text {
+      text-shadow: none;
+    }
+
+    .navbar-inner {
+      grid-template-columns: auto auto;
+    }
+
+    .navbar-links {
+      display: none;
+    }
+
+    .navbar-cta {
+      justify-self: end;
+      gap: var(--space-200);
+      width: auto;
+    }
+
+    .btn-get-in-touch {
+      visibility: hidden;
+      width: 0;
+    }
+
+    .menu-header-right {
+      width: auto;
+    }
+
+    .menu-overlay {
+      padding-inline: var(--x-spacing-mobile);
+      padding-block: var(--section-spacing-sm);
+    }
+
+    .menu-body {
+      align-items: center;
+      margin-top: var(--section-spacing-md);
+    }
+
+    .menu-links {
+      width: 100%;
+    }
+
+    .menu-bottom {
+      display: block;
+    }
+
+    .menu-bottom .credits {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .credits a,
+    p {
+      font-size: var(--fs-400);
+    }
+  }
+</style>
+
+<script>
+  const docEl = document.documentElement;
+  const menuOverlay = document.querySelector('[data-menu-overlay]');
+  const menuButtons = document.querySelectorAll('[data-menu-btn]');
+  const menuCloseButtons = document.querySelectorAll('[data-menu-close]');
+  const miniNav = document.querySelector('[data-mini-nav]');
+
+  let isMenuOpen = false;
+
+  const openMenu = () => {
+    if (!menuOverlay) return;
+    isMenuOpen = true;
+    menuOverlay.classList.add('is-open');
+    docEl.classList.add('menu-open');
+    menuButtons.forEach((btn) => {
+      const text = btn.querySelector('.navbar-menu-text');
+      if (text) text.textContent = 'Close';
+    });
+  };
+
+  const closeMenu = () => {
+    if (!menuOverlay) return;
+    isMenuOpen = false;
+    menuOverlay.classList.remove('is-open');
+    docEl.classList.remove('menu-open');
+    menuButtons.forEach((btn) => {
+      const text = btn.querySelector('.navbar-menu-text');
+      if (text) text.textContent = 'Menu';
+    });
+  };
+
+  const toggleMenu = () => {
+    if (isMenuOpen) closeMenu();
+    else openMenu();
+  };
+
+  menuButtons.forEach((btn) => {
+    btn.addEventListener('click', toggleMenu);
+  });
+
+  menuCloseButtons.forEach((btn) => {
+    btn.addEventListener('click', closeMenu);
+  });
+
+  const handleScroll = () => {
+    if (!miniNav) return;
+    if (window.scrollY > 400 && !isMenuOpen) {
+      miniNav.classList.add('is-visible');
+    } else {
+      miniNav.classList.remove('is-visible');
+    }
+  };
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+</script>
