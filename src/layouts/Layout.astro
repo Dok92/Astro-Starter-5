@@ -108,6 +108,8 @@ const { title, metaTitle, metaDescription, ogTitle, canonical } = Astro.props;
     --section-spacing-xxl: clamp(8rem, 16vw, 16rem);
     --section-spacing-xxxl: clamp(10rem, 18vw, 18rem);
 
+    /* Should be modified per project */
+
     --x-spacing-desktop: var(--section-spacing-lg);
     --x-spacing-tablet: var(--section-spacing-md);
     --x-spacing-mobile: var(--section-spacing-sm);
@@ -115,6 +117,16 @@ const { title, metaTitle, metaDescription, ogTitle, canonical } = Astro.props;
     --y-spacing-desktop: var(--section-spacing-xxxl);
     --y-spacing-tablet: var(--section-spacing-lg);
     --y-spacing-mobile: var(--section-spacing-xl);
+
+    --section-spacing-full-desktop: var(--y-spacing-desktop) var(--x-spacing-desktop);
+    --section-spacing-full-tablet: var(--y-spacing-tablet) var(--x-spacing-tablet);
+    --section-spacing-full-mobile: var(--y-spacing-mobile) var(--x-spacing-mobile);
+    --section-spacing-top-desktop: var(--section-spacing-lg) var(--x-spacing-desktop) 0 var(--x-spacing-desktop);
+    --section-spacing-top-tablet: var(--section-spacing-md) var(--x-spacing-tablet) 0 var(--x-spacing-tablet);
+    --section-spacing-top-mobile: var(--section-spacing-sm) var(--x-spacing-mobile) 0 var(--x-spacing-mobile);
+    --section-spacing-bottom-desktop: 0 var(--x-spacing-desktop) var(--section-spacing-lg) var(--x-spacing-desktop);
+    --section-spacing-bottom-tablet: 0 var(--x-spacing-tablet) var(--section-spacing-md) var(--x-spacing-tablet);
+    --section-spacing-bottom-mobile: 0 var(--x-spacing-mobile) var(--section-spacing-sm) var(--x-spacing-mobile);
 
     --container-spacing: clamp(1rem, 3vw, 2rem); /* Consistent edge spacing */
 
