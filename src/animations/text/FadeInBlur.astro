@@ -1,0 +1,174 @@
+---
+interface Props {
+  type?: 'heading' | 'paragraph';
+  duration?: number;
+  delay?: number;
+  rootMargin?: string;
+}
+
+const {
+  type = 'paragraph',
+  duration = type === 'heading' ? 1.2 : 0.8,
+  delay = 0.05,
+  rootMargin = '0px 0px -100px 0px',
+} = Astro.props;
+---
+
+<div
+  class={`fade-in-blur-container animated-${type}`}
+  data-rootmargin={rootMargin}
+  data-word-delay={delay}
+  style={`--duration: ${duration}s; --word-delay: ${delay}s;`}>
+  <slot />
+</div>
+
+<style>
+  .fade-in-blur-container {
+    --duration: 0.8s;
+    --word-delay: 0.05s;
+  }
+
+  /* Core Animation */
+  @keyframes fadeInBlur {
+    from {
+      opacity: 0;
+      filter: blur(10px);
+    }
+    to {
+      opacity: 1;
+      filter: blur(0);
+    }
+  }
+
+  /* Base styles - words are hidden by default */
+  .fade-in-blur-container :global(.word) {
+    display: inline-block;
+    opacity: 0;
+    filter: blur(10px);
+  }
+
+  /* Animation classes for headings (1.2s default) */
+  .fade-in-blur-container.animated-heading.is-visible :global(.word-1) {
+    animation: fadeInBlur var(--duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) calc(var(--word-delay) * 0) forwards;
+  }
+
+  .fade-in-blur-container.animated-heading.is-visible :global(.word-2) {
+    animation: fadeInBlur var(--duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) calc(var(--word-delay) * 1) forwards;
+  }
+
+  .fade-in-blur-container.animated-heading.is-visible :global(.word-3) {
+    animation: fadeInBlur var(--duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) calc(var(--word-delay) * 2) forwards;
+  }
+
+  .fade-in-blur-container.animated-heading.is-visible :global(.word-4) {
+    animation: fadeInBlur var(--duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) calc(var(--word-delay) * 3) forwards;
+  }
+
+  .fade-in-blur-container.animated-heading.is-visible :global(.word-5) {
+    animation: fadeInBlur var(--duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) calc(var(--word-delay) * 4) forwards;
+  }
+
+  .fade-in-blur-container.animated-heading.is-visible :global(.word-6) {
+    animation: fadeInBlur var(--duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) calc(var(--word-delay) * 5) forwards;
+  }
+
+  .fade-in-blur-container.animated-heading.is-visible :global(.word-7) {
+    animation: fadeInBlur var(--duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) calc(var(--word-delay) * 6) forwards;
+  }
+
+  .fade-in-blur-container.animated-heading.is-visible :global(.word-8) {
+    animation: fadeInBlur var(--duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) calc(var(--word-delay) * 7) forwards;
+  }
+
+  .fade-in-blur-container.animated-heading.is-visible :global(.word-9) {
+    animation: fadeInBlur var(--duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) calc(var(--word-delay) * 8) forwards;
+  }
+
+  .fade-in-blur-container.animated-heading.is-visible :global(.word-10) {
+    animation: fadeInBlur var(--duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) calc(var(--word-delay) * 9) forwards;
+  }
+
+  .fade-in-blur-container.animated-heading.is-visible :global(.word-11) {
+    animation: fadeInBlur var(--duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) calc(var(--word-delay) * 10) forwards;
+  }
+
+  .fade-in-blur-container.animated-heading.is-visible :global(.word-12) {
+    animation: fadeInBlur var(--duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) calc(var(--word-delay) * 11) forwards;
+  }
+
+  /* Animation classes for paragraphs (0.8s default) */
+  .fade-in-blur-container.animated-paragraph.is-visible :global(.word-1) {
+    animation: fadeInBlur var(--duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) calc(var(--word-delay) * 0) forwards;
+  }
+
+  .fade-in-blur-container.animated-paragraph.is-visible :global(.word-2) {
+    animation: fadeInBlur var(--duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) calc(var(--word-delay) * 1) forwards;
+  }
+
+  .fade-in-blur-container.animated-paragraph.is-visible :global(.word-3) {
+    animation: fadeInBlur var(--duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) calc(var(--word-delay) * 2) forwards;
+  }
+
+  .fade-in-blur-container.animated-paragraph.is-visible :global(.word-4) {
+    animation: fadeInBlur var(--duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) calc(var(--word-delay) * 3) forwards;
+  }
+
+  .fade-in-blur-container.animated-paragraph.is-visible :global(.word-5) {
+    animation: fadeInBlur var(--duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) calc(var(--word-delay) * 4) forwards;
+  }
+
+  .fade-in-blur-container.animated-paragraph.is-visible :global(.word-6) {
+    animation: fadeInBlur var(--duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) calc(var(--word-delay) * 5) forwards;
+  }
+
+  .fade-in-blur-container.animated-paragraph.is-visible :global(.word-7) {
+    animation: fadeInBlur var(--duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) calc(var(--word-delay) * 6) forwards;
+  }
+
+  .fade-in-blur-container.animated-paragraph.is-visible :global(.word-8) {
+    animation: fadeInBlur var(--duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) calc(var(--word-delay) * 7) forwards;
+  }
+
+  .fade-in-blur-container.animated-paragraph.is-visible :global(.word-9) {
+    animation: fadeInBlur var(--duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) calc(var(--word-delay) * 8) forwards;
+  }
+
+  .fade-in-blur-container.animated-paragraph.is-visible :global(.word-10) {
+    animation: fadeInBlur var(--duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) calc(var(--word-delay) * 9) forwards;
+  }
+
+  .fade-in-blur-container.animated-paragraph.is-visible :global(.word-11) {
+    animation: fadeInBlur var(--duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) calc(var(--word-delay) * 10) forwards;
+  }
+
+  .fade-in-blur-container.animated-paragraph.is-visible :global(.word-12) {
+    animation: fadeInBlur var(--duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) calc(var(--word-delay) * 11) forwards;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const fadeInBlurContainers = document.querySelectorAll('.fade-in-blur-container');
+
+    fadeInBlurContainers.forEach((container) => {
+      const rootMarginValue = (container as HTMLElement).dataset.rootmargin || '0px 0px -100px 0px';
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          rootMargin: rootMarginValue,
+          threshold: 0.2,
+        },
+      );
+
+      observer.observe(container);
+    });
+  });
+</script>

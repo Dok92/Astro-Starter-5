@@ -3,6 +3,7 @@
 import Footer from '../components/main/Footer.astro';
 import Layout from '../layouts/Layout.astro';
 import AnimateOnScroll from '../animations/AnimateOnScroll.astro';
+import FadeInBlurText from '../animations/text/FadeInBlur.astro';
 import Faq1 from '../components/accordions/Faq1.astro';
 import Navbar5 from '../components/navbars/Navbar5.astro';
 ---
@@ -49,7 +50,35 @@ import Navbar5 from '../components/navbars/Navbar5.astro';
     <Faq1 />
   </section>
   <section class='four'>
-    <h1>Section four</h1>
+    <FadeInBlurText type='heading'>
+      <h1>
+        <span class='word word-1'>Professional</span>
+        <span class='word word-2'>Design</span>
+        <span class='word word-3'>Solutions</span>
+      </h1>
+    </FadeInBlurText>
+
+    <!-- Paragraph with fade-in blur animation -->
+    <FadeInBlurText type='paragraph'>
+      <p>
+        <span class='word word-1'>We</span>
+        <span class='word word-2'>create</span>
+        <span class='word word-3'>stunning</span>
+        <span class='word word-4'>websites</span>
+        <span class='word word-5'>for</span>
+        <span class='word word-6'>your</span>
+        <span class='word word-7'>business.</span>
+      </p>
+    </FadeInBlurText>
+
+    <!-- Custom duration and delay -->
+    <FadeInBlurText type='heading' duration={1.5} delay={0.08}>
+      <h2>
+        <span class='word word-1'>Fast</span>
+        <span class='word word-2'>and</span>
+        <span class='word word-3'>Beautiful</span>
+      </h2>
+    </FadeInBlurText>
   </section>
   <Footer />
 </Layout>
