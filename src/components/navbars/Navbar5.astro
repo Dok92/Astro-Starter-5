@@ -1,0 +1,80 @@
+<!-- 
+ https://www.chargetrip.com/
+
+ This navbar goes well with card like radius sections. One added benefit is having first (hero) section of whatever height needed, not of of 100vh, because hero section card fits any height.
+ 
+-->
+<nav class='navbar'>
+  <div class='logo'>
+    <a href='/'>
+      <!-- <img src='/img/logo.svg' alt='' /> -->
+      <h3>MyLogo</h3>
+    </a>
+  </div>
+  <div class='nav-items'>
+    <ul>
+      <li><a href='#'>Home</a></li>
+      <li><a href='#'>About</a></li>
+      <li><a href='#'>Services</a></li>
+      <li><a href='#'>Contact</a></li>
+    </ul>
+  </div>
+  <a href='#' class='cta'>Pozovite</a>
+  <div class='hamburger-menu'></div>
+</nav>
+
+<style>
+  nav {
+    z-index: 100;
+    display: flex;
+    place-content: center;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1568px;
+    height: min-content;
+    padding: 12px 24px;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: lightgray;
+    color: black;
+    border-radius: 0 0 8px 8px;
+  }
+
+  h3 {
+    color: black;
+  }
+
+  nav a {
+    text-decoration: none;
+  }
+
+  .nav-items li a {
+    color: black;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+  }
+
+  nav li {
+    cursor: pointer;
+  }
+
+  .cta {
+    background-color: black;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+  }
+
+  @media (max-width: 768px) {
+    nav {
+      margin-top: var(--space-200);
+    }
+  }
+</style>

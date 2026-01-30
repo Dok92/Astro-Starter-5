@@ -14,23 +14,23 @@
   </div>
 
   <!-- Hero Section -->
-<section class="hero">
-  <h1 class="animated-heading fade-in-blur">
-    <span class="word word-1">Professional</span>
-    <span class="word word-2">Design</span>
-    <span class="word word-3">Solutions</span>
-  </h1>
-  
-  <p class="animated-paragraph fade-in-blur">
-    <span class="word word-1">We</span>
-    <span class="word word-2">create</span>
-    <span class="word word-3">stunning</span>
-    <span class="word word-4">websites</span>
-    <span class="word word-5">for</span>
-    <span class="word word-6">your</span>
-    <span class="word word-7">business.</span>
-  </p>
-</section>
+  <section class="hero">
+    <h1 class="animated-heading fade-in-blur">
+      <span class="word word-1">Professional</span>
+      <span class="word word-2">Design</span>
+      <span class="word word-3">Solutions</span>
+    </h1>
+
+    <p class="animated-paragraph fade-in-blur">
+      <span class="word word-1">We</span>
+      <span class="word word-2">create</span>
+      <span class="word word-3">stunning</span>
+      <span class="word word-4">websites</span>
+      <span class="word word-5">for</span>
+      <span class="word word-6">your</span>
+      <span class="word word-7">business.</span>
+    </p>
+  </section>
 
 </body>
 
@@ -58,119 +58,141 @@
   }
 
   /* Core Animation Styles */
-@keyframes fadeInBlur {
-  from {
+  @keyframes fadeInBlur {
+    from {
+      opacity: 0;
+      filter: blur(10px);
+      /* transform: translateY(10px); */
+    }
+
+    to {
+      opacity: 1;
+      filter: blur(0);
+      /* transform: translateY(0); */
+    }
+  }
+
+  /* Base styles for headings */
+  .animated-heading .word {
+    display: inline-block;
     opacity: 0;
     filter: blur(10px);
     /* transform: translateY(10px); */
   }
-  to {
-    opacity: 1;
-    filter: blur(0);
-    /* transform: translateY(0); */
+
+  /* Base styles for paragraphs (slightly different animation time) */
+  .animated-paragraph .word {
+    display: inline-block;
+    opacity: 0;
+    filter: blur(10px);
+    /* transform: translateY(10px); */
   }
-}
 
-/* Base styles for headings */
-.animated-heading .word {
-  display: inline-block;
-  opacity: 0;
-  filter: blur(10px);
-  /* transform: translateY(10px); */
-}
+  /* Heading animation classes (1.2s duration) */
+  .animated-heading .word-1 {
+    animation: fadeInBlur 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s forwards;
+  }
 
-/* Base styles for paragraphs (slightly different animation time) */
-.animated-paragraph .word {
-  display: inline-block;
-  opacity: 0;
-  filter: blur(10px);
-  /* transform: translateY(10px); */
-}
+  .animated-heading .word-2 {
+    animation: fadeInBlur 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s forwards;
+  }
 
-/* Heading animation classes (1.2s duration) */
-.animated-heading .word-1 {
-  animation: fadeInBlur 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s forwards;
-}
-.animated-heading .word-2 {
-  animation: fadeInBlur 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s forwards;
-}
-.animated-heading .word-3 {
-  animation: fadeInBlur 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s forwards;
-}
-.animated-heading .word-4 {
-  animation: fadeInBlur 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.15s forwards;
-}
-.animated-heading .word-5 {
-  animation: fadeInBlur 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s forwards;
-}
-.animated-heading .word-6 {
-  animation: fadeInBlur 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.25s forwards;
-}
-.animated-heading .word-7 {
-  animation: fadeInBlur 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
-}
-.animated-heading .word-8 {
-  animation: fadeInBlur 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.35s forwards;
-}
-.animated-heading .word-9 {
-  animation: fadeInBlur 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s forwards;
-}
-.animated-heading .word-10 {
-  animation: fadeInBlur 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.45s forwards;
-}
-.animated-heading .word-11 {
-  animation: fadeInBlur 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards;
-}
-.animated-heading .word-12 {
-  animation: fadeInBlur 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.55s forwards;
-}
+  .animated-heading .word-3 {
+    animation: fadeInBlur 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s forwards;
+  }
 
-/* Paragraph animation classes (faster 0.8s duration) */
-.animated-paragraph .word-1 {
-  animation: fadeInBlur 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s forwards;
-}
-.animated-paragraph .word-2 {
-  animation: fadeInBlur 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s forwards;
-}
-.animated-paragraph .word-3 {
-  animation: fadeInBlur 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s forwards;
-}
-.animated-paragraph .word-4 {
-  animation: fadeInBlur 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.15s forwards;
-}
-.animated-paragraph .word-5 {
-  animation: fadeInBlur 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s forwards;
-}
-.animated-paragraph .word-6 {
-  animation: fadeInBlur 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.25s forwards;
-}
-.animated-paragraph .word-7 {
-  animation: fadeInBlur 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
-}
-.animated-paragraph .word-8 {
-  animation: fadeInBlur 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.35s forwards;
-}
-.animated-paragraph .word-9 {
-  animation: fadeInBlur 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s forwards;
-}
-.animated-paragraph .word-10 {
-  animation: fadeInBlur 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.45s forwards;
-}
-.animated-paragraph .word-11 {
-  animation: fadeInBlur 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards;
-}
-.animated-paragraph .word-12 {
-  animation: fadeInBlur 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.55s forwards;
-}
-  
+  .animated-heading .word-4 {
+    animation: fadeInBlur 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.15s forwards;
+  }
+
+  .animated-heading .word-5 {
+    animation: fadeInBlur 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s forwards;
+  }
+
+  .animated-heading .word-6 {
+    animation: fadeInBlur 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.25s forwards;
+  }
+
+  .animated-heading .word-7 {
+    animation: fadeInBlur 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
+  }
+
+  .animated-heading .word-8 {
+    animation: fadeInBlur 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.35s forwards;
+  }
+
+  .animated-heading .word-9 {
+    animation: fadeInBlur 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s forwards;
+  }
+
+  .animated-heading .word-10 {
+    animation: fadeInBlur 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.45s forwards;
+  }
+
+  .animated-heading .word-11 {
+    animation: fadeInBlur 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards;
+  }
+
+  .animated-heading .word-12 {
+    animation: fadeInBlur 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.55s forwards;
+  }
+
+  /* Paragraph animation classes (faster 0.8s duration) */
+  .animated-paragraph .word-1 {
+    animation: fadeInBlur 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s forwards;
+  }
+
+  .animated-paragraph .word-2 {
+    animation: fadeInBlur 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s forwards;
+  }
+
+  .animated-paragraph .word-3 {
+    animation: fadeInBlur 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s forwards;
+  }
+
+  .animated-paragraph .word-4 {
+    animation: fadeInBlur 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.15s forwards;
+  }
+
+  .animated-paragraph .word-5 {
+    animation: fadeInBlur 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s forwards;
+  }
+
+  .animated-paragraph .word-6 {
+    animation: fadeInBlur 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.25s forwards;
+  }
+
+  .animated-paragraph .word-7 {
+    animation: fadeInBlur 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
+  }
+
+  .animated-paragraph .word-8 {
+    animation: fadeInBlur 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.35s forwards;
+  }
+
+  .animated-paragraph .word-9 {
+    animation: fadeInBlur 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s forwards;
+  }
+
+  .animated-paragraph .word-10 {
+    animation: fadeInBlur 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.45s forwards;
+  }
+
+  .animated-paragraph .word-11 {
+    animation: fadeInBlur 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards;
+  }
+
+  .animated-paragraph .word-12 {
+    animation: fadeInBlur 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.55s forwards;
+  }
 </style>
 
-<script> 
+<script>
 
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function () {
     // Find all sections
     const fadeInBlurElements = document.ge('fade-in-blur');
-    
+
     // Function to check if element is in viewport
     function isInViewport(element) {
       const rect = element.getBoundingClientRect();
@@ -179,7 +201,7 @@
         rect.bottom >= 0
       );
     }
-    
+
     // Initial check
     function checkVisibility() {
       fadeInBlurElements.forEach(element => {
@@ -189,10 +211,10 @@
         }
       });
     }
-    
+
     // Check on scroll
     window.addEventListener('scroll', checkVisibility);
-    
+
     // Initial check
     checkVisibility();
   });
