@@ -1,13 +1,12 @@
 ---
 interface Props {
   title: string;
-  metaTitle?: string;
   metaDescription?: string;
   ogTitle?: string;
   canonical?: string;
 }
 
-const { title, metaTitle, metaDescription, ogTitle, canonical } = Astro.props;
+const { title, metaDescription, ogTitle, canonical } = Astro.props;
 ---
 
 <!doctype html>
@@ -18,7 +17,7 @@ const { title, metaTitle, metaDescription, ogTitle, canonical } = Astro.props;
     <!-- META -->
     <meta charset='UTF-8' />
     <meta name='viewport' content='width=device-width' />
-    <meta name='title' content={metaTitle} />
+    <meta name='title' content={title} />
     <meta name='description' content={metaDescription} />
 
     <meta property='og:url' content={canonical} />
@@ -74,10 +73,21 @@ const { title, metaTitle, metaDescription, ogTitle, canonical } = Astro.props;
 
   :root {
     /* Color palette - name by use case */
-    --bg: rgb(252, 255, 250);
-    --primary: #983f24;
-    --text-header: #5f4200;
-    --text-body: #775337;
+    --bg: hsl(0, 0%, 100%);
+    --primary: hsl(0, 100%, 33%);
+    --text-header: var(--text-900);
+    --text-body: var(--text-700);
+
+    --text-50: hsl(0, 0%, 98%);
+    --text-100: hsl(0, 0%, 95%);
+    --text-200: hsl(0, 0%, 90%);
+    --text-300: hsl(0, 0%, 80%);
+    --text-400: hsl(0, 0%, 65%);
+    --text-500: hsl(0, 0%, 50%);
+    --text-600: hsl(0, 0%, 40%);
+    --text-700: hsl(0, 0%, 30%);
+    --text-800: hsl(0, 0%, 20%);
+    --text-900: hsl(0, 0%, 10%);
 
     /* Responsive font sizes */
     --fs-100: clamp(0.75rem, 2vw + 0.25rem, 0.875rem); /* + rem is for users zooming */
@@ -148,32 +158,35 @@ const { title, metaTitle, metaDescription, ogTitle, canonical } = Astro.props;
   }
 
   h1,
-  h2 {
+  h2,
+  h3 {
     line-height: 1.2;
     margin: 0;
-    position: relative;
-    z-index: 15;
-    text-transform: capitalize;
   }
 
   h1 {
     font-size: var(--fs-800);
     font-weight: 800;
     margin-bottom: 24px;
+    text-transform: capitalize;
   }
   h2 {
     font-size: var(--fs-700);
     font-weight: 700;
+    text-transform: capitalize;
   }
   h3 {
     line-height: 1.2;
     margin: 0;
-    position: relative;
     font-size: var(--fs-400);
   }
 
   p {
     font-size: var(--fs-200);
+  }
+
+  section {
+    scroll-margin-top: var(--space-500);
   }
   @font-face {
     font-family: 'Inter';

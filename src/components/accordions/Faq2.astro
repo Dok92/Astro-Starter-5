@@ -1,0 +1,195 @@
+---
+interface AccordionItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  items: AccordionItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<section class='faq-section padding-horizontal padding-bottom' id='pitanja'>
+  <div class='faq-container'>
+    <h2>Često postavljena pitanja</h2>
+
+    <div class='accordion'>
+      {
+        items.map((item, index) => (
+          <div class='accordion-item' data-index={index}>
+            <button class='accordion-header' type='button' aria-expanded='false'>
+              <span class='question'>{item.question}</span>
+              <img src='/img/icons/icons8-plus.svg' alt='' class='icon' aria-hidden='true' />
+            </button>
+            <div class='accordion-content'>
+              <p class='answer'>{item.answer}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-container {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-200);
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  h2 {
+    position: sticky;
+    top: var(--space-500);
+    align-self: start;
+    text-transform: capitalize;
+  }
+
+  .accordion {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .accordion-item {
+    border-bottom: 1px solid var(--text-200);
+  }
+
+  .accordion-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-500);
+    padding: var(--space-500) 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .question {
+    font-size: var(--fs-500);
+    font-weight: 500;
+    color: var(--text-700);
+    transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .accordion-item.active .question {
+    color: black;
+  }
+
+  .icon {
+    width: 24px;
+    height: 24px;
+    margin-top: 4px;
+    flex-shrink: 0;
+    transition:
+      transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      filter 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .accordion-item.active .icon {
+    transform: rotate(45deg);
+    filter: brightness(0) saturate(100%);
+  }
+
+  .accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .accordion-item.active .accordion-content {
+    max-height: 500px;
+  }
+
+  .answer {
+    color: var(--text-800);
+    font-size: var(--fs-300);
+    line-height: 1.6;
+    padding-bottom: var(--space-500);
+    margin: 0;
+  }
+
+  @media (max-width: 1024px) {
+    .faq-container {
+      grid-template-columns: 1fr;
+      gap: var(--space-600);
+    }
+
+    h2 {
+      position: static;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .faq-container {
+      gap: var(--space-500);
+    }
+
+    .question {
+      font-size: var(--fs-400);
+    }
+
+    .answer {
+      font-size: var(--fs-200);
+    }
+
+    .icon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const accordionItems = document.querySelectorAll('.accordion-item');
+
+    accordionItems.forEach((item) => {
+      const header = item.querySelector('.accordion-header') as HTMLButtonElement;
+      const content = item.querySelector('.accordion-content') as HTMLElement;
+
+      if (!header || !content) return;
+
+      header.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+
+        // Close all other items
+        accordionItems.forEach((otherItem) => {
+          if (otherItem !== item && otherItem.classList.contains('active')) {
+            otherItem.classList.remove('active');
+            const otherHeader = otherItem.querySelector('.accordion-header') as HTMLButtonElement;
+            if (otherHeader) {
+              otherHeader.setAttribute('aria-expanded', 'false');
+            }
+          }
+        });
+
+        // Toggle current item
+        if (isActive) {
+          item.classList.remove('active');
+          header.setAttribute('aria-expanded', 'false');
+        } else {
+          item.classList.add('active');
+          header.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    // Open first item by default
+    const firstItem = accordionItems[0];
+    if (firstItem) {
+      firstItem.classList.add('active');
+      const firstHeader = firstItem.querySelector('.accordion-header') as HTMLButtonElement;
+      if (firstHeader) {
+        firstHeader.setAttribute('aria-expanded', 'true');
+      }
+    }
+  });
+</script>
