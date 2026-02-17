@@ -1,9 +1,10 @@
 ---
-const { animation, duration = 0.8, delay = 0, rootMargin = '0px 0px -100px 0px' } = Astro.props;
+const { animation, duration = 0.8, delay = 0, treshold, rootMargin } = Astro.props;
 ---
 
 <div
   class='observer-container'
+  data-treshold={treshold}
   data-rootmargin={rootMargin}
   data-animation={animation}
   style={`--duration: ${duration}s; --delay: ${delay}s;`}>
@@ -18,67 +19,117 @@ const { animation, duration = 0.8, delay = 0, rootMargin = '0px 0px -100px 0px' 
 
   .observer-container > :global(*) {
     opacity: 0;
-    transition:
-      opacity var(--duration) cubic-bezier(0.26, 0.51, 0.58, 1) var(--delay),
-      transform var(--duration) cubic-bezier(0.26, 0.51, 0.58, 1) var(--delay);
+    visibility: hidden;
   }
 
-  /* Up slide animation */
-  .observer-container[data-animation='up-slide'] > :global(*) {
-    transform: translateY(80px);
+  .observer-container.is-visible > :global(*) {
+    visibility: visible;
+    animation-duration: var(--duration);
+    animation-delay: var(--delay);
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(0.26, 0.51, 0.58, 1);
   }
 
   .observer-container[data-animation='up-slide'].is-visible > :global(*) {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Down slide */
-  .observer-container[data-animation='down-slide'] > :global(*) {
-    transform: translateY(-130px);
-    opacity: 0;
+    animation-name: up-slide;
   }
 
   .observer-container[data-animation='down-slide'].is-visible > :global(*) {
-    opacity: 1;
-    transform: translateY(0);
+    animation-name: down-slide;
   }
-  /* Slide from left */
-  .observer-container[data-animation='slide-from-left'] > :global(*) {
-    transform: translateX(-80px);
-  }
+
   .observer-container[data-animation='slide-from-left'].is-visible > :global(*) {
-    opacity: 1;
-    transform: translateX(0);
+    animation-name: slide-from-left;
   }
 
-  /* Slide from right */
-  .observer-container[data-animation='slide-from-right'] > :global(*) {
-    transform: translateX(80px);
-  }
   .observer-container[data-animation='slide-from-right'].is-visible > :global(*) {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  /* Slide from down left */
-  .observer-container[data-animation='slide-from-down-left'] > :global(*) {
-    transform: translate(-80px, 80px);
+    animation-name: slide-from-right;
   }
 
   .observer-container[data-animation='slide-from-down-left'].is-visible > :global(*) {
-    opacity: 1;
-    transform: translate(0, 0);
-  }
-
-  /* Slide from down right */
-  .observer-container[data-animation='slide-from-down-right'] > :global(*) {
-    transform: translate(80px, 80px);
+    animation-name: slide-from-down-left;
   }
 
   .observer-container[data-animation='slide-from-down-right'].is-visible > :global(*) {
-    opacity: 1;
-    transform: translate(0, 0);
+    animation-name: slide-from-down-right;
+  }
+  .observer-container[data-animation='fade'].is-visible > :global(*) {
+    animation-name: fade;
+  }
+
+  @keyframes up-slide {
+    from {
+      opacity: 0;
+      transform: translateY(80px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes down-slide {
+    from {
+      opacity: 0;
+      transform: translateY(-130px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-from-left {
+    from {
+      opacity: 0;
+      transform: translateX(-80px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slide-from-right {
+    from {
+      opacity: 0;
+      transform: translateX(80px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slide-from-down-left {
+    from {
+      opacity: 0;
+      transform: translate(-80px, 80px);
+    }
+    to {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+  }
+
+  @keyframes slide-from-down-right {
+    from {
+      opacity: 0;
+      transform: translate(80px, 80px);
+    }
+    to {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+  }
+
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 </style>
 
@@ -88,6 +139,7 @@ const { animation, duration = 0.8, delay = 0, rootMargin = '0px 0px -100px 0px' 
 
     observerContainers.forEach((container) => {
       const rootMarginValue = (container as HTMLElement).dataset.rootmargin || '0px 0px -100px 0px';
+      const tresholdValue = parseFloat((container as HTMLElement).dataset.treshold || '0.2');
 
       const observer = new IntersectionObserver(
         (entries) => {
@@ -100,8 +152,8 @@ const { animation, duration = 0.8, delay = 0, rootMargin = '0px 0px -100px 0px' 
         },
         {
           rootMargin: rootMarginValue,
-          threshold: 0.2,
-        }
+          threshold: tresholdValue,
+        },
       );
 
       observer.observe(container);

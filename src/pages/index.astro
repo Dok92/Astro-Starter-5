@@ -1,16 +1,13 @@
 ---
-// import Hero from '../components/main/Hero.astro';
-import Footer from '../components/main/Footer.astro';
+import Hero from '../components/main/HeroImg.astro';
 import Layout from '../layouts/Layout.astro';
 import AnimateOnScroll from '../animations/AnimateOnScroll.astro';
 import FadeInBlurText from '../animations/text/FadeInBlur.astro';
 import Faq1 from '../components/accordions/Faq1.astro';
-import Navbar5 from '../components/navbars/Navbar5.astro';
 ---
 
-<Layout title='Home' metaTitle='Home' metaDescription='Home'>
-  <Navbar5 />
-  <!-- <Hero /> -->
+<Layout title='Home' ogTitle='Home' metaDescription='Home' canonical=''>
+  <Hero />
   <section class='one'>
     <div class='container'>
       <AnimateOnScroll animation='up-slide'>
@@ -80,7 +77,6 @@ import Navbar5 from '../components/navbars/Navbar5.astro';
       </h2>
     </FadeInBlurText>
   </section>
-  <Footer />
 </Layout>
 
 <style>

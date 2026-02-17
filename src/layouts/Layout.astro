@@ -1,4 +1,6 @@
 ---
+import Navbar3 from '../components/navbars/Navbar3.astro';
+import Footer from '../components/main/Footer.astro';
 interface Props {
   title: string;
   metaDescription?: string;
@@ -47,7 +49,11 @@ const { title, metaDescription, ogTitle, canonical } = Astro.props;
     <link rel='preload' href='/fonts/Inter/InterVariable.woff2' as='font' type='font/woff2' crossorigin='anonymous' />
   </head>
   <body>
-    <slot />
+    <main>
+      <Navbar3 />
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>
 
@@ -187,6 +193,10 @@ const { title, metaDescription, ogTitle, canonical } = Astro.props;
 
   section {
     scroll-margin-top: var(--space-500);
+  }
+
+  section.padding-bottom {
+    scroll-margin-top: var(--space-800);
   }
   @font-face {
     font-family: 'Inter';

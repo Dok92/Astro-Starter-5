@@ -1,12 +1,17 @@
 // @ts-nocheck
 import { defineConfig } from 'astro/config';
-
-import solidJs from '@astrojs/solid-js';
 import vercel from '@astrojs/vercel';
 
-// https://astro.build/config
+import partytown from '@astrojs/partytown';
+
 export default defineConfig({
-  integrations: [solidJs()],
+  integrations: [
+    partytown({
+      config: {
+        forward: ['dataLayer.push'],
+      },
+    }),
+  ],
   adapter: vercel({
     webAnalytics: {
       enabled: true,

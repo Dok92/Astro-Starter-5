@@ -181,15 +181,5 @@ const { items } = Astro.props;
         }
       });
     });
-
-    // Open first item by default
-    const firstItem = accordionItems[0];
-    if (firstItem) {
-      firstItem.classList.add('active');
-      const firstHeader = firstItem.querySelector('.accordion-header') as HTMLButtonElement;
-      if (firstHeader) {
-        firstHeader.setAttribute('aria-expanded', 'true');
-      }
-    }
   });
 </script>

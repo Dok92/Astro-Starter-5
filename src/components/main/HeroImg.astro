@@ -1,43 +1,183 @@
 ---
 import { Image } from 'astro:assets';
 import bg from '../../../public/img/placeholder/bg.avif';
+import AnimateOnScroll from '../../animations/AnimateOnScroll.astro';
 ---
 
 <section class='hero'>
   <div class='gradient-scrim'></div>
-  <Image src={bg} class='hero-img' alt='Placeholder Image' />
-  <div class='container'>
-    <h1>Hero h1</h1>
+  <div class='overlay'>
+    <Image src={bg} class='hero-img' alt='' />
   </div>
+  <div class='container'>
+    <div class='text'>
+      <AnimateOnScroll animation='slide-from-left' delay={0}>
+        <h1></h1>
+      </AnimateOnScroll>
+      <AnimateOnScroll animation='slide-from-left' delay={0.2} rootMargin='0px 0px 150px 0px'>
+        <h2></h2>
+      </AnimateOnScroll>
+    </div>
+    <AnimateOnScroll animation='fade' delay={0.4} rootMargin='0px 0px 150px 0px'>
+      <a href='' class='cta' id='desktop'></a>
+      <a href='tel:+' class='cta' id='mobile'></a>
+    </AnimateOnScroll>
+  </div>
+
+  <style>
+    .hero {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100svh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gradient-scrim {
+      z-index: 2;
+      pointer-events: none;
+      background-image: linear-gradient(#0d0a08cc, #0d0a0800 37%, #0d0a08e6 77%);
+      position: absolute;
+      inset: 0%;
+      /* NOTE good grad for covering top nav and bottom text; https://t3.tech */
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      overflow: hidden;
+      background: black;
+    }
+
+    .hero-img {
+      width: 100%;
+      height: 110%;
+      object-fit: cover;
+      position: absolute;
+      z-index: 1;
+      will-change: transform, opacity;
+      opacity: 0;
+      animation: hero-reveal 1.1s 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
+
+    @keyframes hero-reveal {
+      from {
+        opacity: 0;
+        transform: translate(0%, -5%) scale(1.1);
+      }
+      to {
+        opacity: 1;
+        transform: translate(0%, -5%) scale(1);
+      }
+    }
+
+    .container {
+      width: 100%;
+      height: 100svh;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 0 var(--x-spacing-desktop) var(--space-600) var(--x-spacing-desktop);
+      z-index: 10;
+    }
+
+    .text {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-500);
+    }
+
+    h1 {
+      max-width: 1000px;
+      font-size: clamp(5rem, 9vw, 100px);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      text-transform: capitalize;
+      color: rgb(255, 255, 255);
+    }
+
+    h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 400;
+      color: rgb(233, 233, 233);
+    }
+
+    .cta {
+      background: var(--primary-100);
+      padding: 1.5rem;
+      color: black;
+      font-weight: 500;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: var(--fs-200);
+      transition: background 0.3s ease;
+    }
+
+    .cta#mobile {
+      display: none;
+    }
+
+    .cta#desktop {
+      display: block;
+    }
+
+    .cta:hover {
+      background: var(--primary-200);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 var(--x-spacing-tablet) var(--space-400) var(--x-spacing-tablet);
+      }
+
+      .container :global(.observer-container) {
+        width: 100%;
+      }
+
+      h1 {
+        font-size: var(--fs-700);
+      }
+
+      h2 {
+        font-size: clamp(1.25rem, 4vw, 1.75rem);
+      }
+
+      .container {
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        gap: var(--space-500);
+      }
+
+      .cta#desktop {
+        display: none;
+      }
+
+      .cta#mobile {
+        display: block;
+        padding: 1rem;
+        text-align: center;
+      }
+    }
+  </style>
+
+  <script>
+    window.addEventListener('scroll', () => {
+      const hero = document.querySelector('.hero') as HTMLElement;
+      const img = document.querySelector('.hero-img') as HTMLElement;
+
+      const heroHeight = hero.offsetHeight;
+      const scrolled = window.scrollY;
+
+      let progress = Math.min(scrolled / heroHeight, 1);
+
+      let yPos = -5 + progress * 20;
+
+      img.style.transform = `translate3d(0, ${yPos}%, 0)`;
+    });
+  </script>
 </section>
-
-<style>
-  .hero {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100svh;
-  }
-
-  .gradient-scrim {
-    z-index: 2;
-    pointer-events: none;
-    background-image: linear-gradient(#0d0a08cc, #0d0a0800 39%, #0d0a08e6 80%);
-    position: absolute;
-    inset: 0%;
-    /* NOTE good grad for covering top nav and bottom text; https://t3.tech */
-  }
-
-  .hero-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    z-index: 1;
-  }
-
-  h1 {
-    color: rgb(200, 200, 200);
-  }
-</style>
