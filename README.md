@@ -7,9 +7,9 @@
 
 ```sh
 cd ~/Programming/DEV
-npx degit Dok92/Astro-Starter-5x "new-project"
+npx degit Dok92/Astro-Starter-5 "new-project"
 cd "new-project"
-npm install
+npm i
 code .
 ```
 

@@ -1,7 +1,7 @@
 {
-  "name": "astro-solid-tailwind-starter",
+  "name": "astro-starter",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -9,7 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/vercel": "^8.2.8",
-    "astro": "^5.13.10"
+    "@astrojs/vercel": "^9.0.4",
+    "astro": "^5.18.0"
   }
 }
